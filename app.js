@@ -25,23 +25,6 @@ if (isConfigured) {
   );
 }
 
-/* ---------------- Floating background balloons/confetti ---------------- */
-(function initFloaters() {
-  const layer = document.getElementById("floaters");
-  const emojis = ["🎈", "🎉", "💜", "💎", "✨", "🎊"];
-  const count = window.innerWidth < 640 ? 10 : 18;
-  for (let i = 0; i < count; i++) {
-    const span = document.createElement("span");
-    span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.fontSize = 1.2 + Math.random() * 1.8 + "rem";
-    const duration = 14 + Math.random() * 14;
-    span.style.animationDuration = duration + "s";
-    span.style.animationDelay = -Math.random() * duration + "s";
-    layer.appendChild(span);
-  }
-})();
-
 /* ---------------- Scroll reveal ---------------- */
 (function initReveal() {
   document.querySelectorAll(".section > *").forEach((el) => el.classList.add("reveal"));
@@ -102,7 +85,7 @@ function renderRsvps(names) {
   rsvpCount.textContent = `(${names.length})`;
   names.forEach((name) => {
     const li = document.createElement("li");
-    li.textContent = "🎈 " + name;
+    li.textContent = name;
     rsvpList.appendChild(li);
   });
 }
@@ -136,7 +119,7 @@ rsvpForm.addEventListener("submit", async (e) => {
       writeLocal(LOCAL_RSVP_KEY, local);
       renderRsvps(local.map((r) => r.name));
     }
-    rsvpStatus.textContent = "You're on the list! 🎉 Location details coming your way.";
+    rsvpStatus.textContent = "You're on the list! Location details coming your way.";
     rsvpStatus.className = "form-status success";
     rsvpForm.reset();
     fireConfetti();
@@ -167,7 +150,6 @@ function renderWishes(wishes) {
     const card = document.createElement("div");
     card.className = "wish-card";
     card.innerHTML = `
-      <span class="quote-icon">💜</span>
       <p class="msg">${escapeHtml(w.message)}</p>
       <p class="author">— ${escapeHtml(w.name)}</p>
     `;
@@ -204,7 +186,7 @@ wishForm.addEventListener("submit", async (e) => {
       writeLocal(LOCAL_WISH_KEY, local);
       renderWishes(local);
     }
-    wishStatus.textContent = "Your wish is on the wall! 💜";
+    wishStatus.textContent = "Your wish is on the wall!";
     wishStatus.className = "form-status success";
     wishForm.reset();
     fireConfetti();
