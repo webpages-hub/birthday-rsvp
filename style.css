@@ -4,6 +4,7 @@
   --purple-mid: #7b2ff7;    /* purple */
   --purple-light: #d8b4fe;  /* lavender */
   --purple-deep: #3d0a58;   /* dark text, on light backgrounds */
+  --orchid: #b3308f;        /* deep magenta-purple, Expectation background */
   --teal: #2dd4bf;          /* doodle accent */
   --lime: #a3e635;          /* doodle accent */
   --orange: #ff8c42;        /* doodle accent */
@@ -43,6 +44,7 @@ body {
 .bg-purple { background: var(--purple-mid); }
 .bg-baby-pink { background: var(--pink-soft); }
 .bg-light-purple { background: var(--purple-light); }
+.bg-orchid { background: var(--orchid); }
 
 /* Text on dark/saturated backgrounds (fuchsia, purple) */
 .on-dark, .on-dark .section-sub { color: var(--white); }
@@ -60,19 +62,27 @@ body {
 
 /* ============ Eyebrow kicker (section labels) ============ */
 .kicker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--purple-deep);
-  margin: 0 0 0.9rem;
   text-align: center;
+  margin: 0 0 0.9rem;
 }
-.kicker-gold { color: var(--gold); }
+.kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+}
+/* Each badge uses a bright, saturated fill with whichever text color
+   (dark or white) keeps it at or above WCAG AA contrast. */
+.badge-pink { background: var(--pink-hot); color: var(--purple-deep); }
+.badge-lime { background: var(--lime); color: var(--purple-deep); }
+.badge-teal { background: var(--teal); color: var(--purple-deep); }
+.badge-gold { background: var(--gold); color: var(--purple-deep); }
+.badge-purple { background: var(--purple-mid); color: var(--white); }
 
 /* ============ Icons ============ */
 .icon {
