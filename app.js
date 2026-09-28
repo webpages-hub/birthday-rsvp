@@ -198,8 +198,7 @@ function throwBalloons() {
       if (TARGETS.includes(current)) {
         primarySolved = true;
         primaryTarget = current;
-        const other = TARGETS.find((t) => t !== current);
-        status.textContent = `You got it! Bonus round — can you also spell it "${other}"?`;
+        status.textContent = "You got it! Can you also spell it in another variant?";
         updateSwapsLabel();
         throwBalloons();
         return;
@@ -213,7 +212,7 @@ function throwBalloons() {
     const other = TARGETS.find((t) => t !== primaryTarget);
     if (current === other) {
       throwBalloons();
-      endGame("Amazing — you found both! Halimat says thank you for coming.", true);
+      endGame("Halimat says thank you and she looks forward to seeing you at her birthday party.", true);
     }
   }
 
