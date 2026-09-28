@@ -67,6 +67,86 @@ function fireConfetti() {
   setTimeout(() => confetti({ particleCount: 60, spread: 120, origin: { y: 0.4 }, colors }), 200);
 }
 
+/* ---------------- Balloon-toss celebration ---------------- */
+function throwBalloons() {
+  const layer = document.getElementById("balloon-layer");
+  if (!layer) return;
+  const colors = ["#ff2fb1", "#7b2ff7", "#2dd4bf", "#a3e635", "#ffd700", "#ff8c42"];
+  const count = 16;
+  for (let i = 0; i < count; i++) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.classList.add("balloon-fx");
+    svg.setAttribute("viewBox", "0 0 32 48");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#icon-balloon-single");
+    use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#icon-balloon-single");
+    svg.appendChild(use);
+
+    const left = 4 + Math.random() * 92;
+    const drift = 16 + Math.random() * 40;
+    const size = 32 + Math.random() * 26;
+    const duration = 3.8 + Math.random() * 2.2;
+    const delay = Math.random() * 1.4;
+
+    svg.style.left = left + "vw";
+    svg.style.width = size + "px";
+    svg.style.height = size * 1.5 + "px";
+    svg.style.color = colors[Math.floor(Math.random() * colors.length)];
+    svg.style.setProperty("--drift", drift + "px");
+    svg.style.animationDuration = duration + "s";
+    svg.style.animationDelay = delay + "s";
+
+    svg.addEventListener("animationend", () => svg.remove());
+    layer.appendChild(svg);
+  }
+}
+
+/* ---------------- "Unscramble Halimat" tap-to-swap game ---------------- */
+(function initScrambleGame() {
+  const wrap = document.getElementById("scramble-tiles");
+  const status = document.getElementById("scramble-status");
+  if (!wrap || !status) return;
+
+  const tiles = Array.from(wrap.querySelectorAll(".tile"));
+  const target = "HALIMAT";
+  let selected = null;
+  let solved = false;
+
+  function checkSolved() {
+    const current = tiles.map((t) => t.textContent).join("");
+    if (current === target) {
+      solved = true;
+      wrap.classList.add("solved");
+      status.textContent = "You got it! Halimat says thank you for coming.";
+      tiles.forEach((t) => (t.tabIndex = -1));
+      throwBalloons();
+    }
+  }
+
+  tiles.forEach((tile) => {
+    tile.addEventListener("click", () => {
+      if (solved) return;
+      if (!selected) {
+        selected = tile;
+        tile.classList.add("selected");
+        return;
+      }
+      if (selected === tile) {
+        selected.classList.remove("selected");
+        selected = null;
+        return;
+      }
+      const a = selected.textContent;
+      const b = tile.textContent;
+      selected.textContent = b;
+      tile.textContent = a;
+      selected.classList.remove("selected");
+      selected = null;
+      checkSolved();
+    });
+  });
+})();
+
 function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str;

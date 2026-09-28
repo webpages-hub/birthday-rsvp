@@ -67,6 +67,14 @@
         <path d="M40 8c-3 0-5 3-5 7s2 6 5 6M40 8v24"/>
       </g>
     </symbol>
+    <symbol id="icon-puzzle" viewBox="0 0 48 48">
+      <path d="M8 8h12a4 4 0 0 1 8 0h12v12a4 4 0 0 1 0 8v12H28a4 4 0 0 1-8 0H8V28a4 4 0 0 1 0-8V8z"/>
+    </symbol>
+    <symbol id="icon-balloon-single" viewBox="0 0 32 48">
+      <ellipse cx="16" cy="16" rx="13" ry="16" fill="currentColor"/>
+      <path d="M16 32 L13 36 L18 38 L15 42" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M13 30 L16 33 L19 30" fill="currentColor"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -217,11 +225,35 @@
   </div>
 </section>
 
+<!-- ============ ONE LAST GAME — light purple ============ -->
+<section class="fw-section bg-light-purple on-light game-section" id="game">
+  <div class="container">
+    <p class="kicker"><span class="kicker-badge badge-orange"><svg class="icon" aria-hidden="true"><use href="#icon-puzzle"/></svg>06 &mdash; Before You Go</span></p>
+    <h2 class="section-title">A Light Game</h2>
+    <p class="section-sub">Before you go, unscramble this.</p>
+
+    <div class="scramble-game">
+      <div class="scramble-tiles" id="scramble-tiles">
+        <button type="button" class="tile">T</button>
+        <button type="button" class="tile">A</button>
+        <button type="button" class="tile">M</button>
+        <button type="button" class="tile">I</button>
+        <button type="button" class="tile">L</button>
+        <button type="button" class="tile">A</button>
+        <button type="button" class="tile">H</button>
+      </div>
+      <p class="scramble-status" id="scramble-status" role="status" aria-live="polite">Tap two letters to swap them.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER — baby pink ============ -->
 <footer class="footer bg-baby-pink on-light">
   <p class="footer-script">See you there</p>
   <p class="footer-sub">Made with love for Halimat's big 25th</p>
 </footer>
+
+<div id="balloon-layer" aria-hidden="true"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
