@@ -11,6 +11,12 @@
   --gold: #ffd700;          /* yellow */
   --white: #fffaff;
   --radius: 22px;
+
+  /* Soft, section-tinted card backgrounds (instead of plain white) */
+  --tint-pink: #ffe6f7;     /* on baby-pink (Vibe) */
+  --tint-orchid: #f3dcee;   /* on orchid (Expectation) */
+  --tint-fuchsia: #ffdcf0;  /* on fuchsia (RSVP) */
+  --tint-purple: #ece1fd;   /* on purple (Wall of Wishes) */
 }
 
 * { box-sizing: border-box; }
@@ -328,7 +334,7 @@ body {
   gap: 1.5rem;
 }
 .vibe-card {
-  background: var(--white);
+  background: var(--tint-pink);
   border-radius: var(--radius);
   padding: 2rem 1.5rem;
   text-align: center;
@@ -341,6 +347,7 @@ body {
 }
 .vibe-card h3 { margin: 0.2rem 0 0.4rem; font-size: 1.15rem; color: var(--purple-deep); }
 .vibe-card p { margin: 0; color: #6b3a94; font-size: 0.95rem; }
+.expectation-section .vibe-card { background: var(--tint-orchid); }
 
 /* ============ Dress code ============ */
 .dresscode-text { font-size: 1.15rem; max-width: 480px; margin: 0 auto; }
@@ -349,7 +356,7 @@ body {
 .glass-form {
   max-width: 480px;
   margin: 0 auto 3rem;
-  background: var(--white);
+  background: var(--tint-fuchsia);
   border: 2px solid var(--purple-light);
   border-radius: var(--radius);
   padding: 2rem;
@@ -358,6 +365,7 @@ body {
   flex-direction: column;
   gap: 0.4rem;
 }
+.wishes-section .glass-form { background: var(--tint-purple); }
 .glass-form label {
   font-weight: 600;
   font-size: 0.9rem;
@@ -424,7 +432,7 @@ body {
   margin: 0 auto;
 }
 .wish-card {
-  background: var(--white);
+  background: var(--tint-purple);
   border-radius: 18px;
   padding: 1.4rem;
   box-shadow: 0 10px 26px rgba(61, 10, 88, 0.2);
