@@ -5,6 +5,8 @@
   --purple-light: #d8b4fe;  /* lavender */
   --purple-deep: #3d0a58;   /* dark text, on light backgrounds */
   --teal: #2dd4bf;          /* doodle accent */
+  --lime: #a3e635;          /* doodle accent */
+  --orange: #ff8c42;        /* doodle accent */
   --gold: #ffd700;          /* yellow */
   --white: #fffaff;
   --radius: 22px;
@@ -219,10 +221,10 @@ body {
   animation-play-state: paused;
 }
 .years-badge.play .doodle { animation-play-state: running; }
-.doodle-1, .doodle-6 { animation-delay: 1.3s; }
-.doodle-2, .doodle-7 { animation-delay: 2.3s; }
-.doodle-3, .doodle-8 { animation-delay: 3.3s; }
-.doodle-4, .doodle-5, .doodle-9 { animation-delay: 4.3s; }
+.doodle-1, .doodle-6, .doodle-12 { animation-delay: 1.3s; }
+.doodle-2, .doodle-7, .doodle-13 { animation-delay: 2.3s; }
+.doodle-3, .doodle-8, .doodle-10 { animation-delay: 3.3s; }
+.doodle-4, .doodle-5, .doodle-9, .doodle-11, .doodle-14 { animation-delay: 4.3s; }
 @keyframes doodlePop {
   0% { opacity: 0; transform: scale(0) rotate(0deg); }
   70% { opacity: 1; }
