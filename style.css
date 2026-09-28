@@ -84,8 +84,8 @@ body {
 
 .hero-icon {
   position: absolute;
-  color: var(--purple-mid);
-  opacity: 0.9;
+  color: var(--gold);
+  opacity: 0.8;
   z-index: 0;
 }
 .hero-icon.gift { top: 8%; left: 6%; width: 2.6rem; height: 2.6rem; animation: bobIcon 5s ease-in-out infinite; }
