@@ -404,6 +404,7 @@ const wishSubmit = document.getElementById("wish-submit");
 const wishesWall = document.getElementById("wishes-wall");
 const wishesEmpty = document.getElementById("wishes-empty");
 const wishesMore = document.getElementById("wishes-more");
+const wishesLead = document.querySelector(".wishes-lead");
 
 const HOME_WISHES_LIMIT = 2;
 
@@ -423,9 +424,11 @@ function renderWishes(wishes, hasMore) {
   if (wishesMore) wishesMore.hidden = !hasMore;
   if (!wishes.length) {
     wishesEmpty.style.display = "block";
+    if (wishesLead) wishesLead.style.display = "none";
     return;
   }
   wishesEmpty.style.display = "none";
+  if (wishesLead) wishesLead.style.display = "block";
   wishes.forEach((w) => {
     const card = document.createElement("div");
     card.className = "wish-card";

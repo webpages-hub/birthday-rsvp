@@ -133,6 +133,7 @@ const wishStatus = document.getElementById("wish-status");
 const wishSubmit = document.getElementById("wish-submit");
 const wishesWall = document.getElementById("wishes-wall");
 const wishesEmpty = document.getElementById("wishes-empty");
+const wishesLead = document.querySelector(".wishes-lead");
 
 function wishCardHtml(w) {
   const tag = w.relationship
@@ -149,9 +150,11 @@ function renderWishes(wishes) {
   wishesWall.querySelectorAll(".wish-card").forEach((el) => el.remove());
   if (!wishes.length) {
     wishesEmpty.style.display = "block";
+    if (wishesLead) wishesLead.style.display = "none";
     return;
   }
   wishesEmpty.style.display = "none";
+  if (wishesLead) wishesLead.style.display = "block";
   wishes.forEach((w) => {
     const card = document.createElement("div");
     card.className = "wish-card";
