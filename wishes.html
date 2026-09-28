@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wall of Wishes — Halimat's 25th Birthday Bash</title>
+<meta name="description" content="Every birthday message and memory left for Halimat's 25th.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baguet+Script&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Reusable icon sprites -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-balloons" viewBox="0 0 48 48">
+      <ellipse cx="17" cy="16" rx="11" ry="13"/>
+      <ellipse cx="33" cy="20" rx="9" ry="11" opacity="0.6"/>
+      <path d="M17 29c-3 4-1 6 0 9M33 31c2 3 0 5 -1 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-heart-doodle" viewBox="0 0 48 48">
+      <path d="M24 42C10 32 4 23 4 15.5 4 9 9 4 15.5 4c4 0 7 2 8.5 5 1.5-3 4.5-5 8.5-5C39 4 44 9 44 15.5 44 23 38 32 24 42Z"
+            fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-sound-on" viewBox="0 0 48 48">
+      <path d="M6 18v12h8l12 10V8L14 18H6z"/>
+      <path d="M32 16a10 10 0 0 1 0 16M37 11a17 17 0 0 1 0 26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-sound-off" viewBox="0 0 48 48">
+      <path d="M6 18v12h8l12 10V8L14 18H6z"/>
+      <path d="M31 18l11 12M42 18L31 30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<audio id="bg-audio" loop preload="none">
+  <source src="audio/birthday-song.mp3" type="audio/mpeg">
+  <source src="audio/birthday-song.ogg" type="audio/ogg">
+</audio>
+<button type="button" id="music-toggle" class="music-toggle" aria-pressed="false" aria-label="Play background music">
+  <svg class="icon" aria-hidden="true"><use href="#icon-sound-off"/></svg>
+</button>
+
+<div class="wishes-page-back">
+  <a href="index.html" class="wishes-back-link">&larr; Back to the invite</a>
+</div>
+
+<!-- ============ WALL OF WISHES — purple ============ -->
+<section class="fw-section bg-purple on-dark wishes-section" id="wishes">
+  <div class="container">
+    <p class="kicker"><span class="kicker-badge badge-gold"><svg class="icon" aria-hidden="true"><use href="#icon-balloons"/></svg>Well-Wishes</span></p>
+    <h2 class="section-title">Wall of Wishes</h2>
+    <p class="section-sub">Every message and memory left for Halimat, all in one place.</p>
+
+    <form id="wish-form" class="glass-form">
+      <label for="wish-name">Your Name</label>
+      <input type="text" id="wish-name" name="name" placeholder="Your name" required maxlength="80" autocomplete="name">
+
+      <label for="wish-relationship">Relationship (optional)</label>
+      <select id="wish-relationship" name="relationship">
+        <option value="">Select one...</option>
+        <option value="Friend">Friend</option>
+        <option value="Family">Family</option>
+        <option value="Colleague">Colleague</option>
+        <option value="Lover">Lover</option>
+        <option value="Partner in Crime">Partner in Crime</option>
+        <option value="Secret Admirer">Secret Admirer</option>
+      </select>
+
+      <label for="wish-message">Your Message</label>
+      <textarea id="wish-message" name="message" rows="4" placeholder="Write your birthday wish or favorite memory of Halimat..." required maxlength="600"></textarea>
+
+      <button type="submit" class="btn btn-primary" id="wish-submit">
+        <span class="btn-label">Leave a Wish &rarr;</span>
+      </button>
+      <p class="form-status" id="wish-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="wishes-lead">Here's what people have said so far&hellip;</p>
+    <div class="wishes-wall" id="wishes-wall">
+      <p class="wishes-empty" id="wishes-empty">Be the first to leave a wish!</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer bg-baby-pink on-light">
+  <p class="footer-script">See you there</p>
+  <p class="footer-sub">Made with love for Halimat's big 25th</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="wishes.js"></script>
+</body>
+</html>
