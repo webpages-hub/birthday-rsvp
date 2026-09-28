@@ -169,6 +169,9 @@ body {
   max-width: 620px;
   aspect-ratio: 800 / 420;
   margin: 0 auto;
+  border: 3px solid var(--teal);
+  border-radius: var(--radius);
+  box-sizing: border-box;
   animation: fadeInUp 1s ease both;
   animation-delay: .3s;
 }
