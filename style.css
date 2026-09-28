@@ -84,8 +84,8 @@ body {
 
 .hero-icon {
   position: absolute;
-  color: var(--gold);
-  opacity: 0.8;
+  color: var(--purple-mid);
+  opacity: 0.9;
   z-index: 0;
 }
 .hero-icon.gift { top: 8%; left: 6%; width: 2.6rem; height: 2.6rem; animation: bobIcon 5s ease-in-out infinite; }
@@ -213,22 +213,36 @@ body {
 .years-line.line-2 { transform: scale(0.4) rotate(5deg); }
 
 .doodle {
+  --wave: 1.3s;
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
   transform: scale(0) rotate(0deg);
-  animation: doodlePop .7s cubic-bezier(.3, 1.4, .4, 1) forwards;
-  animation-play-state: paused;
+  animation:
+    doodlePop .7s cubic-bezier(.3, 1.4, .4, 1) var(--wave) forwards,
+    doodleFloat 3.6s ease-in-out calc(var(--wave) + .7s) infinite;
+  animation-play-state: paused, paused;
 }
-.years-badge.play .doodle { animation-play-state: running; }
-.doodle-1, .doodle-6, .doodle-12 { animation-delay: 1.3s; }
-.doodle-2, .doodle-7, .doodle-13 { animation-delay: 2.3s; }
-.doodle-3, .doodle-8, .doodle-10 { animation-delay: 3.3s; }
-.doodle-4, .doodle-5, .doodle-9, .doodle-11, .doodle-14 { animation-delay: 4.3s; }
+.years-badge.play .doodle { animation-play-state: running, running; }
+.doodle:nth-child(even) { animation-name: doodlePop, doodleFloatAlt; }
+
+.doodle-1, .doodle-6, .doodle-12 { --wave: 1.3s; }
+.doodle-2, .doodle-7, .doodle-13 { --wave: 2.3s; }
+.doodle-3, .doodle-8, .doodle-10 { --wave: 3.3s; }
+.doodle-4, .doodle-5, .doodle-9, .doodle-11, .doodle-14 { --wave: 4.3s; }
+
 @keyframes doodlePop {
   0% { opacity: 0; transform: scale(0) rotate(0deg); }
   70% { opacity: 1; }
   100% { opacity: 1; transform: scale(1) rotate(12deg); }
+}
+@keyframes doodleFloat {
+  0%, 100% { transform: scale(1) rotate(12deg) translateY(0); }
+  50% { transform: scale(1.08) rotate(20deg) translateY(-8px); }
+}
+@keyframes doodleFloatAlt {
+  0%, 100% { transform: scale(1) rotate(12deg) translateY(0); }
+  50% { transform: scale(0.92) rotate(4deg) translateY(7px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
