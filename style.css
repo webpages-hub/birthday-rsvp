@@ -413,17 +413,37 @@ body {
 .wish-card {
   background: var(--tint-purple);
   border-radius: 18px;
-  padding: 1.4rem;
+  padding: 1.4rem 2.4rem 1.4rem 1.4rem;
   box-shadow: 0 10px 26px rgba(61, 10, 88, 0.2);
   border-top: 4px solid var(--pink-hot);
   animation: popIn .45s ease both;
   position: relative;
+  overflow: hidden;
 }
 .wish-card:nth-child(3n+2) { border-top-color: var(--purple-mid); }
 .wish-card:nth-child(3n+3) { border-top-color: var(--gold); }
 .wish-card p.msg { margin: 0 0 0.7rem; color: #4a2a68; font-size: 0.95rem; line-height: 1.5; }
 .wish-card p.author { margin: 0; font-weight: 700; color: var(--pink-hot); font-size: 0.85rem; }
 .wishes-empty { text-align: center; color: var(--white); grid-column: 1 / -1; }
+
+.wish-card-doodle {
+  position: absolute;
+  top: 0.9rem;
+  right: -0.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: var(--pink-hot);
+  opacity: 0.3;
+  transform: rotate(12deg);
+}
+.wish-card:nth-child(3n+2) .wish-card-doodle { color: var(--purple-mid); }
+.wish-card:nth-child(3n+3) .wish-card-doodle { color: var(--gold); }
+
+.wishes-more {
+  display: block;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
 
 /* ============ Scramble game ============ */
 .scramble-game {
@@ -488,7 +508,8 @@ body {
    overrides the browser's default `[hidden] { display: none }` — pin it
    back down so the `hidden` attribute actually hides the button. */
 .scramble-play[hidden],
-.scramble-reset[hidden] {
+.scramble-reset[hidden],
+.wishes-more[hidden] {
   display: none;
 }
 
@@ -517,6 +538,19 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .balloon-fx { animation-duration: 0.01s; }
 }
+
+/* ============ Wishes page back-link bar ============ */
+.wishes-page-back {
+  background: var(--purple-deep);
+  padding: 1rem 1.5rem;
+}
+.wishes-back-link {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.wishes-back-link:hover { text-decoration: underline; }
 
 /* ============ Footer ============ */
 .footer {

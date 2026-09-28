@@ -341,9 +341,21 @@ const wishStatus = document.getElementById("wish-status");
 const wishSubmit = document.getElementById("wish-submit");
 const wishesWall = document.getElementById("wishes-wall");
 const wishesEmpty = document.getElementById("wishes-empty");
+const wishesMore = document.getElementById("wishes-more");
 
-function renderWishes(wishes) {
+const HOME_WISHES_LIMIT = 2;
+
+function wishCardHtml(w) {
+  return `
+    <svg class="icon wish-card-doodle" aria-hidden="true"><use href="#icon-heart-doodle"/></svg>
+    <p class="msg">${escapeHtml(w.message)}</p>
+    <p class="author">— ${escapeHtml(w.name)}</p>
+  `;
+}
+
+function renderWishes(wishes, hasMore) {
   wishesWall.querySelectorAll(".wish-card").forEach((el) => el.remove());
+  if (wishesMore) wishesMore.hidden = !hasMore;
   if (!wishes.length) {
     wishesEmpty.style.display = "block";
     return;
@@ -352,22 +364,20 @@ function renderWishes(wishes) {
   wishes.forEach((w) => {
     const card = document.createElement("div");
     card.className = "wish-card";
-    card.innerHTML = `
-      <p class="msg">${escapeHtml(w.message)}</p>
-      <p class="author">— ${escapeHtml(w.name)}</p>
-    `;
+    card.innerHTML = wishCardHtml(w);
     wishesWall.appendChild(card);
   });
 }
 
 if (db) {
-  const q = query(collection(db, "wishes"), orderBy("createdAt", "desc"), limit(200));
+  const q = query(collection(db, "wishes"), orderBy("createdAt", "desc"), limit(HOME_WISHES_LIMIT + 1));
   onSnapshot(q, (snap) => {
     const wishes = snap.docs.map((d) => d.data());
-    renderWishes(wishes);
+    renderWishes(wishes.slice(0, HOME_WISHES_LIMIT), wishes.length > HOME_WISHES_LIMIT);
   });
 } else {
-  renderWishes(readLocal(LOCAL_WISH_KEY));
+  const local = readLocal(LOCAL_WISH_KEY);
+  renderWishes(local.slice(0, HOME_WISHES_LIMIT), local.length > HOME_WISHES_LIMIT);
 }
 
 wishForm.addEventListener("submit", async (e) => {
@@ -387,7 +397,7 @@ wishForm.addEventListener("submit", async (e) => {
       const local = readLocal(LOCAL_WISH_KEY);
       local.unshift({ name, message });
       writeLocal(LOCAL_WISH_KEY, local);
-      renderWishes(local);
+      renderWishes(local.slice(0, HOME_WISHES_LIMIT), local.length > HOME_WISHES_LIMIT);
     }
     wishStatus.textContent = "Your wish is on the wall!";
     wishStatus.className = "form-status success";
