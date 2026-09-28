@@ -12,11 +12,12 @@
   --white: #fffaff;
   --radius: 22px;
 
-  /* Soft, section-tinted card backgrounds (instead of plain white) */
-  --tint-pink: #ffe6f7;     /* on baby-pink (Vibe) */
-  --tint-orchid: #f3dcee;   /* on orchid (Expectation) */
-  --tint-fuchsia: #ffdcf0;  /* on fuchsia (RSVP) */
-  --tint-purple: #ece1fd;   /* on purple (Wall of Wishes) */
+  /* Soft, section-tinted card backgrounds (instead of plain white) —
+     mixed toward each section's own hue, not just barely off-white. */
+  --tint-pink: #ffdaf2;     /* on baby-pink (Vibe) */
+  --tint-orchid: #e1acd2;   /* on orchid (Expectation) */
+  --tint-fuchsia: #ffcdec;  /* on fuchsia (RSVP) */
+  --tint-purple: #d9c6fb;   /* on purple (Wall of Wishes) */
 }
 
 * { box-sizing: border-box; }
