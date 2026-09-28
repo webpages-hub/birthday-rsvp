@@ -172,31 +172,6 @@ body {
   animation: fadeInUp 1s ease both;
   animation-delay: .3s;
 }
-.sketch-frame {
-  display: none;
-  position: absolute;
-  inset: -6px;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  overflow: visible;
-  pointer-events: none;
-}
-.hero-frame-line {
-  display: none;
-}
-
-@media (max-width: 860px) {
-  .sketch-frame { display: block; }
-  .hero-frame-line {
-    display: block;
-    flex: 1 1 auto;
-    width: 2px;
-    min-height: 2rem;
-    margin: 0 auto;
-    background: repeating-linear-gradient(to bottom, var(--teal) 0 6px, transparent 6px 13px);
-    opacity: 0.45;
-  }
-}
 .years-doodles {
   position: absolute;
   inset: 0;
