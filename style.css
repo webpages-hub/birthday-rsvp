@@ -435,9 +435,9 @@ body {
 .wish-card p.msg {
   margin: 0 0 0.7rem;
   color: #4a2a68;
-  font-size: 1.35rem;
-  line-height: 1.4;
-  font-family: 'Alex Brush', cursive;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  font-family: 'Pacifico', cursive;
 }
 .wish-card p.author { margin: 0; font-weight: 700; color: var(--pink-hot); font-size: 0.85rem; }
 .wish-card .tag {
