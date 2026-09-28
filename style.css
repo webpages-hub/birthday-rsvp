@@ -602,6 +602,40 @@ body {
 }
 .wishes-back-link:hover { text-decoration: underline; }
 
+/* ============ Music toggle ============ */
+.music-toggle {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--purple-deep);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(61, 10, 88, 0.4);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.music-toggle:hover { transform: scale(1.08); }
+.music-toggle .icon { width: 1.5rem; height: 1.5rem; }
+.music-toggle.playing {
+  background: var(--gold);
+  color: var(--purple-deep);
+  animation: musicPulse 1.8s ease-in-out infinite;
+}
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 8px 20px rgba(61, 10, 88, 0.4); }
+  50% { box-shadow: 0 8px 26px rgba(255, 215, 0, 0.55), 0 0 0 6px rgba(255, 215, 0, 0.12); }
+}
+@media (max-width: 520px) {
+  .music-toggle { bottom: 1rem; right: 1rem; width: 2.9rem; height: 2.9rem; }
+}
+
 /* ============ Footer ============ */
 .footer {
   text-align: center;

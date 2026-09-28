@@ -60,6 +60,37 @@ if (isConfigured) {
   obs.observe(badge);
 })();
 
+/* ---------------- Background music toggle ---------------- */
+(function initMusicToggle() {
+  const btn = document.getElementById("music-toggle");
+  const audio = document.getElementById("bg-audio");
+  const iconUse = btn ? btn.querySelector("use") : null;
+  if (!btn || !audio || !iconUse) return;
+
+  function setPlaying(isPlaying) {
+    btn.classList.toggle("playing", isPlaying);
+    btn.setAttribute("aria-pressed", String(isPlaying));
+    btn.setAttribute("aria-label", isPlaying ? "Pause background music" : "Play background music");
+    iconUse.setAttribute("href", isPlaying ? "#icon-sound-on" : "#icon-sound-off");
+  }
+
+  btn.addEventListener("click", async () => {
+    try {
+      if (audio.paused) {
+        await audio.play();
+        setPlaying(true);
+      } else {
+        audio.pause();
+        setPlaying(false);
+      }
+    } catch (err) {
+      console.error("Couldn't play background audio.", err);
+    }
+  });
+
+  audio.addEventListener("ended", () => setPlaying(false));
+})();
+
 function fireConfetti() {
   if (typeof confetti !== "function") return;
   const colors = ["#ff2fb1", "#a855f7", "#d8b4fe", "#ffd700", "#ffffff"];
