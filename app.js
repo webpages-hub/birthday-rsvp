@@ -42,6 +42,24 @@ if (isConfigured) {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 })();
 
+/* ---------------- Confetti-blowing "25 years later" badge ---------------- */
+(function initConfettiBadge() {
+  const badge = document.getElementById("confetti-badge");
+  if (!badge) return;
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          badge.classList.add("play");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  obs.observe(badge);
+})();
+
 function fireConfetti() {
   if (typeof confetti !== "function") return;
   const colors = ["#ff2fb1", "#a855f7", "#d8b4fe", "#ffd700", "#ffffff"];
