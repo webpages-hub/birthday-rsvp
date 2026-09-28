@@ -180,14 +180,17 @@ function throwBalloons() {
     render(shuffledLetters());
   }
 
-  function endGame(finalMessage) {
+  function endGame(finalMessage, isWin) {
     gameOver = true;
-    wrap.classList.add("solved");
+    if (isWin) wrap.classList.add("solved");
     tiles.forEach((t) => (t.tabIndex = -1));
     resetBtn.hidden = false;
     if (finalMessage) status.textContent = finalMessage;
   }
 
+  // Converting between HALIMAT and TAMILAH always takes exactly two swaps
+  // (positions 0<->6 and 2<->4), regardless of how the puzzle was scrambled.
+  // The bonus round is left uncapped by MAX_SWAPS so that's always reachable.
   function checkSolved() {
     const current = tiles.map((t) => t.textContent).join("");
 
@@ -199,11 +202,10 @@ function throwBalloons() {
         status.textContent = `You got it! Bonus round — can you also spell it "${other}"?`;
         updateSwapsLabel();
         throwBalloons();
-        if (swapsUsed >= MAX_SWAPS) endGame();
         return;
       }
       if (swapsUsed >= MAX_SWAPS) {
-        endGame("Out of swaps — try again!");
+        endGame("Out of swaps — try again!", false);
       }
       return;
     }
@@ -211,10 +213,8 @@ function throwBalloons() {
     const other = TARGETS.find((t) => t !== primaryTarget);
     if (current === other) {
       throwBalloons();
-      endGame("Amazing — you found both! Halimat says thank you for coming.");
-      return;
+      endGame("Amazing — you found both! Halimat says thank you for coming.", true);
     }
-    if (swapsUsed >= MAX_SWAPS) endGame();
   }
 
   function onTileClick(tile) {
