@@ -27,7 +27,7 @@ if (isConfigured) {
 
 /* ---------------- Scroll reveal ---------------- */
 (function initReveal() {
-  document.querySelectorAll(".section > *").forEach((el) => el.classList.add("reveal"));
+  document.querySelectorAll(".fw-section .container").forEach((el) => el.classList.add("reveal"));
   const obs = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
