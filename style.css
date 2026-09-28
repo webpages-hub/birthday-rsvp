@@ -469,9 +469,29 @@ body {
 .wish-card:nth-child(4n) .wish-card-doodle { color: var(--purple-mid); }
 
 .wishes-more {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   width: fit-content;
   margin: 2rem auto 0;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+.wishes-more:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px) scale(1.03);
+}
+.wishes-more .arrow {
+  display: inline-block;
+  animation: arrowBounce 1.3s ease-in-out infinite;
+}
+@keyframes arrowBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wishes-more .arrow { animation: none; }
 }
 
 /* ============ Scramble game ============ */
