@@ -295,30 +295,44 @@ function writeLocal(key, arr) {
   }
 }
 
-const GOOGLE_FORM_BASE =
-  "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/viewform";
+const GOOGLE_FORM_RESPONSE_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/formResponse";
 const GOOGLE_FORM_NAME_ENTRY = "entry.2114240558";
 
-function googleFormUrl(name) {
-  const url = new URL(GOOGLE_FORM_BASE);
-  url.searchParams.set("usp", "pp_url");
-  url.searchParams.set(GOOGLE_FORM_NAME_ENTRY, name);
-  return url.toString();
-}
-
-rsvpForm.addEventListener("submit", (e) => {
+rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nameInput = document.getElementById("rsvp-name");
   const name = nameInput.value.trim();
   if (!name) return;
 
   rsvpSubmit.disabled = true;
-  rsvpStatus.textContent = "Opening the RSVP form...";
-  rsvpStatus.className = "form-status success";
-  rsvpForm.reset();
-  fireConfetti();
-  window.open(googleFormUrl(name), "_blank", "noopener");
-  rsvpSubmit.disabled = false;
+  rsvpStatus.textContent = "Sending...";
+  rsvpStatus.className = "form-status";
+
+  try {
+    const body = new URLSearchParams();
+    body.set(GOOGLE_FORM_NAME_ENTRY, name);
+    // Google Forms doesn't send CORS headers, so the response is opaque —
+    // "no-cors" is the only mode that lets the POST go through at all; we
+    // can't read back success/failure, only whether the request itself
+    // could be sent (network errors still throw and land in the catch).
+    await fetch(GOOGLE_FORM_RESPONSE_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+    rsvpStatus.textContent = "You're on the list! Location details coming your way.";
+    rsvpStatus.className = "form-status success";
+    rsvpForm.reset();
+    fireConfetti();
+  } catch (err) {
+    console.error(err);
+    rsvpStatus.textContent = "Something went wrong — please try again.";
+    rsvpStatus.className = "form-status error";
+  } finally {
+    rsvpSubmit.disabled = false;
+  }
 });
 
 /* ---------------- Wall of Wishes ---------------- */
