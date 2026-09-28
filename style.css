@@ -402,28 +402,6 @@ body {
 .form-status.error { color: #e0287a; }
 .form-status.success { color: #16a34a; }
 
-/* ============ RSVP list ============ */
-.rsvp-list-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
-.rsvp-list-wrap h3 { color: var(--white); font-size: 1.3rem; }
-.rsvp-list {
-  list-style: none;
-  padding: 0;
-  margin: 1.2rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-}
-.rsvp-list li {
-  background: var(--white);
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--purple-deep);
-  animation: popIn .4s ease both;
-}
-
 /* ============ Wall of Wishes ============ */
 .wishes-wall {
   display: grid;

@@ -277,10 +277,7 @@ function escapeHtml(str) {
 const rsvpForm = document.getElementById("rsvp-form");
 const rsvpStatus = document.getElementById("rsvp-status");
 const rsvpSubmit = document.getElementById("rsvp-submit");
-const rsvpList = document.getElementById("rsvp-list");
-const rsvpCount = document.getElementById("rsvp-count");
 
-const LOCAL_RSVP_KEY = "halimat-rsvp-local";
 const LOCAL_WISH_KEY = "halimat-wishes-local";
 
 function readLocal(key) {
@@ -298,26 +295,6 @@ function writeLocal(key, arr) {
   }
 }
 
-function renderRsvps(names) {
-  rsvpList.innerHTML = "";
-  rsvpCount.textContent = `(${names.length})`;
-  names.forEach((name) => {
-    const li = document.createElement("li");
-    li.textContent = name;
-    rsvpList.appendChild(li);
-  });
-}
-
-if (db) {
-  const q = query(collection(db, "rsvps"), orderBy("createdAt", "desc"), limit(200));
-  onSnapshot(q, (snap) => {
-    const names = snap.docs.map((d) => d.data().name).filter(Boolean);
-    renderRsvps(names);
-  });
-} else {
-  renderRsvps(readLocal(LOCAL_RSVP_KEY).map((r) => r.name));
-}
-
 const GOOGLE_FORM_BASE =
   "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/viewform";
 const GOOGLE_FORM_NAME_ENTRY = "entry.2114240558";
@@ -329,37 +306,19 @@ function googleFormUrl(name) {
   return url.toString();
 }
 
-rsvpForm.addEventListener("submit", async (e) => {
+rsvpForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const nameInput = document.getElementById("rsvp-name");
   const name = nameInput.value.trim();
   if (!name) return;
 
   rsvpSubmit.disabled = true;
-  rsvpStatus.textContent = "Sending...";
-  rsvpStatus.className = "form-status";
-
-  try {
-    if (db) {
-      await addDoc(collection(db, "rsvps"), { name, createdAt: serverTimestamp() });
-    } else {
-      const local = readLocal(LOCAL_RSVP_KEY);
-      local.unshift({ name });
-      writeLocal(LOCAL_RSVP_KEY, local);
-      renderRsvps(local.map((r) => r.name));
-    }
-    rsvpStatus.textContent = "You're on the list! Finish up on the RSVP form that just opened.";
-    rsvpStatus.className = "form-status success";
-    rsvpForm.reset();
-    fireConfetti();
-    window.open(googleFormUrl(name), "_blank", "noopener");
-  } catch (err) {
-    console.error(err);
-    rsvpStatus.textContent = "Something went wrong — please try again.";
-    rsvpStatus.className = "form-status error";
-  } finally {
-    rsvpSubmit.disabled = false;
-  }
+  rsvpStatus.textContent = "Opening the RSVP form...";
+  rsvpStatus.className = "form-status success";
+  rsvpForm.reset();
+  fireConfetti();
+  window.open(googleFormUrl(name), "_blank", "noopener");
+  rsvpSubmit.disabled = false;
 });
 
 /* ---------------- Wall of Wishes ---------------- */
