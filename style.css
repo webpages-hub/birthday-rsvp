@@ -428,9 +428,11 @@ body {
   position: relative;
   overflow: hidden;
 }
-.wish-card:nth-child(4n+2) { background: var(--tint-orchid); border-top-color: var(--orchid); }
-.wish-card:nth-child(4n+3) { background: var(--tint-fuchsia); border-top-color: var(--gold); }
-.wish-card:nth-child(4n) { background: var(--tint-purple); border-top-color: var(--purple-mid); }
+/* nth-of-type (not nth-child) so the always-present, hidden .wishes-empty
+   placeholder never shifts the color cycle off by one. */
+.wish-card:nth-of-type(4n+2) { background: var(--tint-orchid); border-top-color: var(--orchid); }
+.wish-card:nth-of-type(4n+3) { background: var(--tint-fuchsia); border-top-color: var(--gold); }
+.wish-card:nth-of-type(4n) { background: var(--tint-purple); border-top-color: var(--purple-mid); }
 
 .wish-card p.msg {
   margin: 0 0 0.7rem;
@@ -465,9 +467,9 @@ body {
   opacity: 0.3;
   transform: rotate(12deg);
 }
-.wish-card:nth-child(4n+2) .wish-card-doodle { color: var(--orchid); }
-.wish-card:nth-child(4n+3) .wish-card-doodle { color: var(--gold); }
-.wish-card:nth-child(4n) .wish-card-doodle { color: var(--purple-mid); }
+.wish-card:nth-of-type(4n+2) .wish-card-doodle { color: var(--orchid); }
+.wish-card:nth-of-type(4n+3) .wish-card-doodle { color: var(--gold); }
+.wish-card:nth-of-type(4n) .wish-card-doodle { color: var(--purple-mid); }
 
 .wishes-more {
   display: flex;
