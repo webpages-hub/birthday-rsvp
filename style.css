@@ -106,7 +106,7 @@ body {
   50% { transform: translateY(-14px) rotate(4deg); }
 }
 
-.vibe-card .icon-glasses-accent {
+.vibe-card .vibe-card-icon {
   display: block;
   width: 2.2rem;
   height: 2.2rem;
