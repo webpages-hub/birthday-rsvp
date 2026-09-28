@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baguet+Script&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baguet+Script&family=Alex+Brush&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -44,6 +44,17 @@
       <label for="wish-name">Your Name</label>
       <input type="text" id="wish-name" name="name" placeholder="Your name" required maxlength="80" autocomplete="name">
 
+      <label for="wish-relationship">Relationship (optional)</label>
+      <select id="wish-relationship" name="relationship">
+        <option value="">Select one...</option>
+        <option value="Friend">Friend</option>
+        <option value="Family">Family</option>
+        <option value="Colleague">Colleague</option>
+        <option value="Lover">Lover</option>
+        <option value="Partner in Crime">Partner in Crime</option>
+        <option value="Secret Admirer">Secret Admirer</option>
+      </select>
+
       <label for="wish-message">Your Message</label>
       <textarea id="wish-message" name="message" rows="4" placeholder="Write your birthday wish or favorite memory of Halimat..." required maxlength="600"></textarea>
 
@@ -53,6 +64,7 @@
       <p class="form-status" id="wish-status" role="status" aria-live="polite"></p>
     </form>
 
+    <p class="wishes-lead">Here's what people have said so far&hellip;</p>
     <div class="wishes-wall" id="wishes-wall">
       <p class="wishes-empty" id="wishes-empty">Be the first to leave a wish!</p>
     </div>

@@ -346,10 +346,13 @@ const wishesMore = document.getElementById("wishes-more");
 const HOME_WISHES_LIMIT = 2;
 
 function wishCardHtml(w) {
+  const tag = w.relationship
+    ? `<span class="tag">${escapeHtml(w.relationship)}</span>`
+    : "";
   return `
     <svg class="icon wish-card-doodle" aria-hidden="true"><use href="#icon-heart-doodle"/></svg>
     <p class="msg">${escapeHtml(w.message)}</p>
-    <p class="author">— ${escapeHtml(w.name)}</p>
+    <p class="author">— ${escapeHtml(w.name)} ${tag}</p>
   `;
 }
 
@@ -384,6 +387,7 @@ wishForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("wish-name").value.trim();
   const message = document.getElementById("wish-message").value.trim();
+  const relationship = document.getElementById("wish-relationship").value;
   if (!name || !message) return;
 
   wishSubmit.disabled = true;
@@ -392,10 +396,10 @@ wishForm.addEventListener("submit", async (e) => {
 
   try {
     if (db) {
-      await addDoc(collection(db, "wishes"), { name, message, createdAt: serverTimestamp() });
+      await addDoc(collection(db, "wishes"), { name, message, relationship, createdAt: serverTimestamp() });
     } else {
       const local = readLocal(LOCAL_WISH_KEY);
-      local.unshift({ name, message });
+      local.unshift({ name, message, relationship });
       writeLocal(LOCAL_WISH_KEY, local);
       renderWishes(local.slice(0, HOME_WISHES_LIMIT), local.length > HOME_WISHES_LIMIT);
     }
