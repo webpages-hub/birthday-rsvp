@@ -318,6 +318,17 @@ if (db) {
   renderRsvps(readLocal(LOCAL_RSVP_KEY).map((r) => r.name));
 }
 
+const GOOGLE_FORM_BASE =
+  "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/viewform";
+const GOOGLE_FORM_NAME_ENTRY = "entry.2114240558";
+
+function googleFormUrl(name) {
+  const url = new URL(GOOGLE_FORM_BASE);
+  url.searchParams.set("usp", "pp_url");
+  url.searchParams.set(GOOGLE_FORM_NAME_ENTRY, name);
+  return url.toString();
+}
+
 rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nameInput = document.getElementById("rsvp-name");
@@ -337,10 +348,11 @@ rsvpForm.addEventListener("submit", async (e) => {
       writeLocal(LOCAL_RSVP_KEY, local);
       renderRsvps(local.map((r) => r.name));
     }
-    rsvpStatus.textContent = "You're on the list! Location details coming your way.";
+    rsvpStatus.textContent = "You're on the list! Finish up on the RSVP form that just opened.";
     rsvpStatus.className = "form-status success";
     rsvpForm.reset();
     fireConfetti();
+    window.open(googleFormUrl(name), "_blank", "noopener");
   } catch (err) {
     console.error(err);
     rsvpStatus.textContent = "Something went wrong — please try again.";
