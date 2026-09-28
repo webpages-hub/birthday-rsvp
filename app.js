@@ -176,6 +176,7 @@ function throwBalloons() {
     swapsUsed = 0;
     selected = null;
     playBtn.hidden = true;
+    playBtn.textContent = "Play";
     resetBtn.hidden = true;
     resetBtn.textContent = "Try Again";
     status.textContent = "Tap two letters to swap them.";
@@ -194,6 +195,7 @@ function throwBalloons() {
 
   function startBonusRound() {
     playBtn.hidden = true;
+    playBtn.textContent = "Play";
     gameOver = false;
     status.textContent = "Tap two letters to swap them.";
     render(shuffledLetters());
@@ -213,6 +215,7 @@ function throwBalloons() {
         updateSwapsLabel();
         throwBalloons();
         gameOver = true;
+        playBtn.textContent = "Play";
         playBtn.hidden = false;
         return;
       }
@@ -226,6 +229,13 @@ function throwBalloons() {
     if (current === other) {
       throwBalloons();
       endGame("Halimat says thank you and she looks forward to seeing you at her birthday party.", true);
+      return;
+    }
+    if (current === primaryTarget) {
+      status.textContent = "You've already got that one! Try spelling it another way.";
+      gameOver = true;
+      playBtn.textContent = "Try Again";
+      playBtn.hidden = false;
     }
   }
 
