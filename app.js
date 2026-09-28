@@ -109,15 +109,17 @@ function throwBalloons() {
   const resetBtn = document.getElementById("scramble-reset");
   if (!wrap || !status || !swapsEl || !resetBtn) return;
 
-  const target = "HALIMAT";
+  const TARGETS = ["HALIMAT", "TAMILAH"];
   const MAX_SWAPS = 4;
   let tiles = [];
   let selected = null;
-  let solved = false;
+  let gameOver = false;
+  let primarySolved = false;
+  let primaryTarget = null;
   let swapsUsed = 0;
 
   function shuffledLetters() {
-    const letters = target.split("");
+    const letters = TARGETS[0].split("");
     let arr;
     let attempts = 0;
     do {
@@ -133,12 +135,14 @@ function throwBalloons() {
 
   function isTooRecognizable(arr) {
     const str = arr.join("");
-    if (str === target) return true;
-    let matches = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === target[i]) matches++;
-    }
-    return matches > 1;
+    if (TARGETS.includes(str)) return true;
+    return TARGETS.some((target) => {
+      let matches = 0;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target[i]) matches++;
+      }
+      return matches > 1;
+    });
   }
 
   function render(letters) {
@@ -156,12 +160,18 @@ function throwBalloons() {
   }
 
   function updateSwapsLabel() {
+    if (primarySolved) {
+      swapsEl.textContent = "";
+      return;
+    }
     const left = MAX_SWAPS - swapsUsed;
-    swapsEl.textContent = left > 0 ? `${left} swap${left === 1 ? "" : "s"} left` : "No swaps left";
+    swapsEl.textContent = `${left} swap${left === 1 ? "" : "s"} left`;
   }
 
   function startGame() {
-    solved = false;
+    gameOver = false;
+    primarySolved = false;
+    primaryTarget = null;
     swapsUsed = 0;
     selected = null;
     resetBtn.hidden = true;
@@ -170,37 +180,45 @@ function throwBalloons() {
     render(shuffledLetters());
   }
 
-  function endInSolve() {
-    solved = true;
+  function endGame(finalMessage) {
+    gameOver = true;
     wrap.classList.add("solved");
-    status.textContent = "You got it! Halimat says thank you for coming.";
     tiles.forEach((t) => (t.tabIndex = -1));
     resetBtn.hidden = false;
-    throwBalloons();
-  }
-
-  function endOutOfSwaps() {
-    solved = true;
-    tiles.forEach((t, i) => {
-      t.textContent = target[i];
-      t.tabIndex = -1;
-    });
-    wrap.classList.add("solved");
-    status.textContent = "Out of swaps — it's Halimat, of course!";
-    resetBtn.hidden = false;
+    if (finalMessage) status.textContent = finalMessage;
   }
 
   function checkSolved() {
     const current = tiles.map((t) => t.textContent).join("");
-    if (current === target) {
-      endInSolve();
-    } else if (swapsUsed >= MAX_SWAPS) {
-      endOutOfSwaps();
+
+    if (!primarySolved) {
+      if (TARGETS.includes(current)) {
+        primarySolved = true;
+        primaryTarget = current;
+        const other = TARGETS.find((t) => t !== current);
+        status.textContent = `You got it! Bonus round — can you also spell it "${other}"?`;
+        updateSwapsLabel();
+        throwBalloons();
+        if (swapsUsed >= MAX_SWAPS) endGame();
+        return;
+      }
+      if (swapsUsed >= MAX_SWAPS) {
+        endGame("Out of swaps — try again!");
+      }
+      return;
     }
+
+    const other = TARGETS.find((t) => t !== primaryTarget);
+    if (current === other) {
+      throwBalloons();
+      endGame("Amazing — you found both! Halimat says thank you for coming.");
+      return;
+    }
+    if (swapsUsed >= MAX_SWAPS) endGame();
   }
 
   function onTileClick(tile) {
-    if (solved) return;
+    if (gameOver) return;
     if (!selected) {
       selected = tile;
       tile.classList.add("selected");
