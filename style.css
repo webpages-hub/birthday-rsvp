@@ -502,12 +502,14 @@ body {
   color: var(--purple-deep);
   opacity: 0.75;
 }
+.scramble-play,
 .scramble-reset {
   margin-top: 1.5rem;
 }
 /* .btn sets its own `display`, which (being an author rule) otherwise
    overrides the browser's default `[hidden] { display: none }` — pin it
    back down so the `hidden` attribute actually hides the button. */
+.scramble-play[hidden],
 .scramble-reset[hidden] {
   display: none;
 }

@@ -106,8 +106,9 @@ function throwBalloons() {
   const wrap = document.getElementById("scramble-tiles");
   const status = document.getElementById("scramble-status");
   const swapsEl = document.getElementById("scramble-swaps");
+  const playBtn = document.getElementById("scramble-play");
   const resetBtn = document.getElementById("scramble-reset");
-  if (!wrap || !status || !swapsEl || !resetBtn) return;
+  if (!wrap || !status || !swapsEl || !playBtn || !resetBtn) return;
 
   const TARGETS = ["HALIMAT", "TAMILAH"];
   const MAX_SWAPS = 4;
@@ -174,7 +175,9 @@ function throwBalloons() {
     primaryTarget = null;
     swapsUsed = 0;
     selected = null;
+    playBtn.hidden = true;
     resetBtn.hidden = true;
+    resetBtn.textContent = "Try Again";
     status.textContent = "Tap two letters to swap them.";
     updateSwapsLabel();
     render(shuffledLetters());
@@ -184,8 +187,16 @@ function throwBalloons() {
     gameOver = true;
     if (isWin) wrap.classList.add("solved");
     tiles.forEach((t) => (t.tabIndex = -1));
+    resetBtn.textContent = isWin ? "Play Again" : "Try Again";
     resetBtn.hidden = false;
     if (finalMessage) status.textContent = finalMessage;
+  }
+
+  function startBonusRound() {
+    playBtn.hidden = true;
+    gameOver = false;
+    status.textContent = "Tap two letters to swap them.";
+    render(shuffledLetters());
   }
 
   // Converting between HALIMAT and TAMILAH always takes exactly two swaps
@@ -201,6 +212,8 @@ function throwBalloons() {
         status.textContent = "You got it! Can you also spell it in another variant?";
         updateSwapsLabel();
         throwBalloons();
+        gameOver = true;
+        playBtn.hidden = false;
         return;
       }
       if (swapsUsed >= MAX_SWAPS) {
@@ -239,6 +252,7 @@ function throwBalloons() {
     checkSolved();
   }
 
+  playBtn.addEventListener("click", startBonusRound);
   resetBtn.addEventListener("click", startGame);
   startGame();
 })();
