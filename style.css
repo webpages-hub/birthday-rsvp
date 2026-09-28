@@ -42,18 +42,7 @@ body {
 .bg-fuchsia { background: var(--pink-hot); }
 .bg-purple { background: var(--purple-mid); }
 .bg-baby-pink { background: var(--pink-soft); }
-
-/* Pattern: pebbles | Contrast: 4.9:1 (white text) | Scale: 12px | Rotation: 0deg */
-.bg-dresscode {
-  background-color: #5E56FF;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMicgaGVpZ2h0PScxMic+PGNpcmNsZSBjeD0nMicgY3k9JzInIHI9JzEnIGZpbGw9JyNmZmZmZmYnIG9wYWNpdHk9JzAuMzUnLz48Y2lyY2xlIGN4PSc3LjUnIGN5PSc0LjUnIHI9JzEuMycgZmlsbD0nI2ZmZmZmZicgb3BhY2l0eT0nMC4yMicvPjxjaXJjbGUgY3g9JzQnIGN5PSc5JyByPScwLjknIGZpbGw9JyNmZmZmZmYnIG9wYWNpdHk9JzAuMjgnLz48Y2lyY2xlIGN4PScxMC41JyBjeT0nOS41JyByPScxLjEnIGZpbGw9JyNmZmZmZmYnIG9wYWNpdHk9JzAuMjUnLz48L3N2Zz4=");
-  background-repeat: repeat;
-  background-size: 12px 12px;
-}
-/* purple-deep (the default kicker color) falls short of AA contrast on this
-   blue-purple background — use white, which meets the 4.9:1 ratio the
-   background was built for. */
-.bg-dresscode .kicker { color: var(--white); }
+.bg-light-purple { background: var(--purple-light); }
 
 /* Text on dark/saturated backgrounds (fuchsia, purple) */
 .on-dark, .on-dark .section-sub { color: var(--white); }
