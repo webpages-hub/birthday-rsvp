@@ -2,9 +2,10 @@
   --pink-hot: #ff2fb1;      /* fuchsia pink */
   --pink-soft: #ffb6e6;     /* baby pink */
   --purple-mid: #7b2ff7;    /* purple */
-  --purple-light: #d8b4fe;  /* light purple */
+  --purple-light: #d8b4fe;  /* lavender */
   --purple-deep: #3d0a58;   /* dark text, on light backgrounds */
-  --gold: #ffd700;
+  --red: #ff3b3b;           /* bold red, confetti only */
+  --gold: #ffd700;          /* yellow */
   --white: #fffaff;
   --radius: 22px;
 }
@@ -81,8 +82,8 @@ body {
 
 .hero-icon {
   position: absolute;
-  color: var(--white);
-  opacity: 0.35;
+  color: var(--gold);
+  opacity: 0.8;
   z-index: 0;
 }
 .hero-icon.gift { top: 8%; left: 6%; width: 2.6rem; height: 2.6rem; animation: bobIcon 5s ease-in-out infinite; }
@@ -120,6 +121,19 @@ body {
   font-weight: 600;
   margin-bottom: 0.5rem;
   animation: fadeInDown 1s ease both;
+}
+
+.hero-tagline {
+  color: var(--purple-deep);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 1.25rem 0 1.75rem;
+  animation: fadeInUp 1s ease both;
+  animation-delay: .25s;
+}
+@media (max-width: 860px) {
+  .hero-tagline { margin-inline: auto; }
 }
 
 .script-title {
@@ -171,7 +185,7 @@ body {
 .confetti-badge {
   position: relative;
   width: 100%;
-  max-width: 460px;
+  max-width: 640px;
   aspect-ratio: 800 / 260;
   margin: 0 auto;
   animation: fadeInUp 1s ease both;
@@ -195,7 +209,7 @@ body {
   pointer-events: none;
 }
 .years-number {
-  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-size: clamp(4rem, 13vw, 7.5rem);
   font-weight: 800;
   color: var(--gold);
   line-height: 1;
@@ -203,11 +217,28 @@ body {
 }
 .years-script {
   font-family: 'Baguet Script', cursive;
-  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  font-size: clamp(2.4rem, 7.5vw, 4rem);
   color: var(--white);
   margin: -0.2rem 0 0;
   line-height: 1;
 }
+
+.digit {
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0.3) translateY(24px);
+}
+.confetti-badge.play .digit-2 { animation: digitPop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .15s; }
+.confetti-badge.play .digit-5 { animation: digitPop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .55s; }
+@keyframes digitPop {
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.years-script {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.confetti-badge.play .years-script { animation: fadeInUp .6s ease forwards; animation-delay: .95s; }
 
 .confetti-piece {
   opacity: 0;
@@ -225,6 +256,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .digit, .years-script { animation: none !important; opacity: 1; transform: none; }
   .confetti-piece {
     animation: none;
     opacity: 1;
@@ -253,13 +285,6 @@ body {
 .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(61, 10, 88, 0.35); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-.btn-secondary {
-  background: var(--gold);
-  color: var(--purple-deep);
-  box-shadow: 0 8px 24px rgba(61, 10, 88, 0.2);
-}
-.btn-secondary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(61, 10, 88, 0.3); }
-
 .btn-row {
   display: flex;
   flex-wrap: wrap;
@@ -273,18 +298,6 @@ body {
   0%, 100% { box-shadow: 0 8px 24px rgba(61,10,88,0.25); }
   50% { box-shadow: 0 8px 36px rgba(61,10,88,0.4), 0 0 0 8px rgba(255,255,255,0.15); }
 }
-
-.scroll-cue {
-  position: absolute;
-  bottom: 0.75rem;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  color: var(--purple-deep);
-  opacity: 0.85;
-  animation: fadeInUp 1s ease both, bounce 2s ease-in-out infinite;
-  animation-delay: .8s, 1.5s;
-}
-@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
 @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px);} to { opacity:1; transform: translateY(0);} }
