@@ -4,7 +4,7 @@
   --purple-mid: #7b2ff7;    /* purple */
   --purple-light: #d8b4fe;  /* lavender */
   --purple-deep: #3d0a58;   /* dark text, on light backgrounds */
-  --red: #ff3b3b;           /* bold red, confetti only */
+  --teal: #2dd4bf;          /* doodle accent */
   --gold: #ffd700;          /* yellow */
   --white: #fffaff;
   --radius: 22px;
@@ -160,24 +160,24 @@ body {
   .hero-text .btn-row { justify-content: center; }
 }
 
-/* ============ Confetti-blowing "25 years later" badge ============ */
-.confetti-badge {
+/* ============ "25 Years Later..." doodle badge ============ */
+.years-badge {
   position: relative;
   width: 100%;
-  max-width: 640px;
-  aspect-ratio: 800 / 260;
+  max-width: 620px;
+  aspect-ratio: 800 / 420;
   margin: 0 auto;
   animation: fadeInUp 1s ease both;
   animation-delay: .3s;
 }
-.confetti-svg {
+.years-doodles {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
-.confetti-text {
+.years-text {
   position: absolute;
   inset: 0;
   display: flex;
@@ -187,60 +187,51 @@ body {
   text-align: center;
   pointer-events: none;
 }
-.years-number {
-  font-size: clamp(4rem, 13vw, 7.5rem);
+.years-line {
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  color: var(--gold);
-  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: clamp(2.6rem, 8.5vw, 4.8rem);
+  line-height: 1.05;
   margin: 0;
-}
-.years-script {
-  font-family: 'Baguet Script', cursive;
-  font-size: clamp(2.4rem, 7.5vw, 4rem);
-  color: var(--white);
-  margin: -0.2rem 0 0;
-  line-height: 1;
-}
-
-.digit {
-  display: inline-block;
+  color: var(--gold);
+  text-shadow:
+    1px 1px 0 var(--purple-deep), 2px 2px 0 var(--purple-deep),
+    3px 3px 0 var(--purple-deep), 4px 4px 0 var(--purple-deep),
+    5px 5px 0 var(--purple-deep);
   opacity: 0;
-  transform: scale(0.3) translateY(24px);
+  transform: scale(0.4) rotate(-6deg);
 }
-.confetti-badge.play .digit-2 { animation: digitPop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .15s; }
-.confetti-badge.play .digit-5 { animation: digitPop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .55s; }
-@keyframes digitPop {
-  to { opacity: 1; transform: scale(1) translateY(0); }
+.years-badge.play .line-1 { animation: linePop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .15s; }
+.years-badge.play .line-2 { animation: linePop .5s cubic-bezier(.34, 1.56, .64, 1) forwards; animation-delay: .55s; }
+@keyframes linePop {
+  to { opacity: 1; transform: scale(1) rotate(-3deg); }
 }
+.years-line.line-2 { transform: scale(0.4) rotate(5deg); }
 
-.years-script {
+.doodle {
   opacity: 0;
-  transform: translateY(10px);
-}
-.confetti-badge.play .years-script { animation: fadeInUp .6s ease forwards; animation-delay: .95s; }
-
-.confetti-piece {
-  opacity: 0;
-  transform: translate(0, 0) scale(0) rotate(0deg);
   transform-box: fill-box;
   transform-origin: center;
-  animation: confettiBurst .9s cubic-bezier(.2, .8, .3, 1) forwards;
+  transform: scale(0) rotate(0deg);
+  animation: doodlePop .7s cubic-bezier(.3, 1.4, .4, 1) forwards;
   animation-play-state: paused;
 }
-.confetti-badge.play .confetti-piece { animation-play-state: running; }
-@keyframes confettiBurst {
-  0% { opacity: 0; transform: translate(0, 0) scale(0) rotate(0deg); }
-  55% { opacity: 1; }
-  100% { opacity: 1; transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot)); }
+.years-badge.play .doodle { animation-play-state: running; }
+.doodle-1, .doodle-6 { animation-delay: 1.3s; }
+.doodle-2, .doodle-7 { animation-delay: 2.3s; }
+.doodle-3, .doodle-8 { animation-delay: 3.3s; }
+.doodle-4, .doodle-5, .doodle-9 { animation-delay: 4.3s; }
+@keyframes doodlePop {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  70% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) rotate(12deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .digit, .years-script { animation: none !important; opacity: 1; transform: none; }
-  .confetti-piece {
-    animation: none;
-    opacity: 1;
-    transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot));
-  }
+  .years-line { animation: none !important; opacity: 1; transform: none; }
+  .doodle { animation: none !important; opacity: 1; transform: scale(1) rotate(12deg); }
 }
 
 .btn {

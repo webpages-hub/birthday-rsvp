@@ -42,9 +42,9 @@ if (isConfigured) {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 })();
 
-/* ---------------- Confetti-blowing "25 years later" badge ---------------- */
-(function initConfettiBadge() {
-  const badge = document.getElementById("confetti-badge");
+/* ---------------- "25 Years Later..." doodle badge ---------------- */
+(function initYearsBadge() {
+  const badge = document.getElementById("years-badge");
   if (!badge) return;
   const obs = new IntersectionObserver(
     (entries) => {
