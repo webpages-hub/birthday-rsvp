@@ -61,7 +61,7 @@ if (isConfigured) {
 })();
 
 /* ---------------- Background music toggle ---------------- */
-(function initMusicToggle() {
+(function initMusicPlayer() {
   const btn = document.getElementById("music-toggle");
   const audio = document.getElementById("bg-audio");
   const iconUse = btn ? btn.querySelector("use") : null;
@@ -74,21 +74,45 @@ if (isConfigured) {
     iconUse.setAttribute("href", isPlaying ? "#icon-sound-on" : "#icon-sound-off");
   }
 
-  btn.addEventListener("click", async () => {
+  async function playMusic() {
     try {
-      if (audio.paused) {
-        await audio.play();
-        setPlaying(true);
-      } else {
-        audio.pause();
-        setPlaying(false);
-      }
+      await audio.play();
+      setPlaying(true);
     } catch (err) {
       console.error("Couldn't play background audio.", err);
     }
+  }
+
+  function pauseMusic() {
+    audio.pause();
+    setPlaying(false);
+  }
+
+  btn.addEventListener("click", () => {
+    if (audio.paused) playMusic();
+    else pauseMusic();
   });
 
   audio.addEventListener("ended", () => setPlaying(false));
+
+  /* ---- On-load "play my favorite song?" prompt ---- */
+  const modal = document.getElementById("music-modal");
+  const modalYes = document.getElementById("music-modal-yes");
+  const modalNo = document.getElementById("music-modal-no");
+  const modalClose = document.getElementById("music-modal-close");
+  if (modal && modalYes && modalNo && modalClose) {
+    const closeModal = () => modal.classList.remove("show");
+    modalYes.addEventListener("click", () => {
+      playMusic();
+      closeModal();
+    });
+    modalNo.addEventListener("click", closeModal);
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    modal.classList.add("show");
+  }
 })();
 
 function fireConfetti() {

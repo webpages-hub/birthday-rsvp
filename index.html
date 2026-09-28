@@ -102,6 +102,9 @@
       <path d="M6 18v12h8l12 10V8L14 18H6z"/>
       <path d="M31 18l11 12M42 18L31 30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
     </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -112,6 +115,20 @@
 <button type="button" id="music-toggle" class="music-toggle" aria-pressed="false" aria-label="Play background music">
   <svg class="icon" aria-hidden="true"><use href="#icon-sound-off"/></svg>
 </button>
+
+<div class="music-modal-overlay" id="music-modal">
+  <div class="music-modal" role="dialog" aria-modal="true" aria-labelledby="music-modal-title">
+    <button type="button" class="music-modal-close" id="music-modal-close" aria-label="Close">
+      <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg>
+    </button>
+    <svg class="icon music-modal-icon" aria-hidden="true"><use href="#icon-music"/></svg>
+    <p id="music-modal-title" class="music-modal-title">Would you like to listen to my favorite song?</p>
+    <div class="music-modal-actions">
+      <button type="button" class="btn btn-primary" id="music-modal-yes">Yes, play music</button>
+      <button type="button" class="btn btn-secondary" id="music-modal-no">No, continue silently</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============ HERO — fuchsia pink ============ -->
 <header class="hero bg-fuchsia on-dark">
