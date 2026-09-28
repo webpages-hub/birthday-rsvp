@@ -42,6 +42,61 @@ if (isConfigured) {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 })();
 
+/* ---------------- Background music (follows the main page's choice) ---------------- */
+const MUSIC_PREF_KEY = "halimat-music-playing";
+
+(function initMusicPlayer() {
+  const btn = document.getElementById("music-toggle");
+  const audio = document.getElementById("bg-audio");
+  const iconUse = btn ? btn.querySelector("use") : null;
+  if (!btn || !audio || !iconUse) return;
+
+  function setPlaying(isPlaying) {
+    btn.classList.toggle("playing", isPlaying);
+    btn.setAttribute("aria-pressed", String(isPlaying));
+    btn.setAttribute("aria-label", isPlaying ? "Pause background music" : "Play background music");
+    iconUse.setAttribute("href", isPlaying ? "#icon-sound-on" : "#icon-sound-off");
+    try {
+      localStorage.setItem(MUSIC_PREF_KEY, isPlaying ? "1" : "0");
+    } catch {
+      /* ignore quota/privacy errors */
+    }
+  }
+
+  async function playMusic() {
+    try {
+      await audio.play();
+      setPlaying(true);
+    } catch (err) {
+      console.error("Couldn't play background audio.", err);
+    }
+  }
+
+  function pauseMusic() {
+    audio.pause();
+    setPlaying(false);
+  }
+
+  btn.addEventListener("click", () => {
+    if (audio.paused) playMusic();
+    else pauseMusic();
+  });
+
+  audio.addEventListener("ended", () => setPlaying(false));
+
+  // Pick up whatever the visitor chose on the main invite page. Browsers
+  // may still block this autoplay-with-sound attempt without a fresh
+  // gesture on this page — if so it just stays off until they tap the
+  // toggle themselves, no error surfaced to the user.
+  let wantsMusic = false;
+  try {
+    wantsMusic = localStorage.getItem(MUSIC_PREF_KEY) === "1";
+  } catch {
+    /* ignore privacy errors */
+  }
+  if (wantsMusic) playMusic();
+})();
+
 function fireConfetti() {
   if (typeof confetti !== "function") return;
   const colors = ["#ff2fb1", "#a855f7", "#d8b4fe", "#ffd700", "#ffffff"];

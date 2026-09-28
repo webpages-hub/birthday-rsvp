@@ -61,6 +61,8 @@ if (isConfigured) {
 })();
 
 /* ---------------- Background music toggle ---------------- */
+const MUSIC_PREF_KEY = "halimat-music-playing";
+
 (function initMusicPlayer() {
   const btn = document.getElementById("music-toggle");
   const audio = document.getElementById("bg-audio");
@@ -72,6 +74,11 @@ if (isConfigured) {
     btn.setAttribute("aria-pressed", String(isPlaying));
     btn.setAttribute("aria-label", isPlaying ? "Pause background music" : "Play background music");
     iconUse.setAttribute("href", isPlaying ? "#icon-sound-on" : "#icon-sound-off");
+    try {
+      localStorage.setItem(MUSIC_PREF_KEY, isPlaying ? "1" : "0");
+    } catch {
+      /* ignore quota/privacy errors */
+    }
   }
 
   async function playMusic() {
