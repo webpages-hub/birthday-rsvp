@@ -487,6 +487,15 @@ body {
   font-weight: 600;
   color: var(--purple-deep);
 }
+.scramble-swaps {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--purple-deep);
+  opacity: 0.75;
+}
+.scramble-reset {
+  margin-top: 1.5rem;
+}
 
 /* ============ Balloon-toss celebration ============ */
 #balloon-layer {

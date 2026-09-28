@@ -105,46 +105,125 @@ function throwBalloons() {
 (function initScrambleGame() {
   const wrap = document.getElementById("scramble-tiles");
   const status = document.getElementById("scramble-status");
-  if (!wrap || !status) return;
+  const swapsEl = document.getElementById("scramble-swaps");
+  const resetBtn = document.getElementById("scramble-reset");
+  if (!wrap || !status || !swapsEl || !resetBtn) return;
 
-  const tiles = Array.from(wrap.querySelectorAll(".tile"));
   const target = "HALIMAT";
+  const MAX_SWAPS = 4;
+  let tiles = [];
   let selected = null;
   let solved = false;
+  let swapsUsed = 0;
+
+  function shuffledLetters() {
+    const letters = target.split("");
+    let arr;
+    let attempts = 0;
+    do {
+      arr = letters.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      attempts++;
+    } while (isTooRecognizable(arr) && attempts < 50);
+    return arr;
+  }
+
+  function isTooRecognizable(arr) {
+    const str = arr.join("");
+    if (str === target) return true;
+    let matches = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === target[i]) matches++;
+    }
+    return matches > 1;
+  }
+
+  function render(letters) {
+    wrap.innerHTML = "";
+    wrap.classList.remove("solved");
+    tiles = letters.map((letter) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tile";
+      btn.textContent = letter;
+      btn.addEventListener("click", () => onTileClick(btn));
+      wrap.appendChild(btn);
+      return btn;
+    });
+  }
+
+  function updateSwapsLabel() {
+    const left = MAX_SWAPS - swapsUsed;
+    swapsEl.textContent = left > 0 ? `${left} swap${left === 1 ? "" : "s"} left` : "No swaps left";
+  }
+
+  function startGame() {
+    solved = false;
+    swapsUsed = 0;
+    selected = null;
+    resetBtn.hidden = true;
+    status.textContent = "Tap two letters to swap them.";
+    updateSwapsLabel();
+    render(shuffledLetters());
+  }
+
+  function endInSolve() {
+    solved = true;
+    wrap.classList.add("solved");
+    status.textContent = "You got it! Halimat says thank you for coming.";
+    tiles.forEach((t) => (t.tabIndex = -1));
+    resetBtn.hidden = false;
+    throwBalloons();
+  }
+
+  function endOutOfSwaps() {
+    solved = true;
+    tiles.forEach((t, i) => {
+      t.textContent = target[i];
+      t.tabIndex = -1;
+    });
+    wrap.classList.add("solved");
+    status.textContent = "Out of swaps — it's Halimat, of course!";
+    resetBtn.hidden = false;
+  }
 
   function checkSolved() {
     const current = tiles.map((t) => t.textContent).join("");
     if (current === target) {
-      solved = true;
-      wrap.classList.add("solved");
-      status.textContent = "You got it! Halimat says thank you for coming.";
-      tiles.forEach((t) => (t.tabIndex = -1));
-      throwBalloons();
+      endInSolve();
+    } else if (swapsUsed >= MAX_SWAPS) {
+      endOutOfSwaps();
     }
   }
 
-  tiles.forEach((tile) => {
-    tile.addEventListener("click", () => {
-      if (solved) return;
-      if (!selected) {
-        selected = tile;
-        tile.classList.add("selected");
-        return;
-      }
-      if (selected === tile) {
-        selected.classList.remove("selected");
-        selected = null;
-        return;
-      }
-      const a = selected.textContent;
-      const b = tile.textContent;
-      selected.textContent = b;
-      tile.textContent = a;
+  function onTileClick(tile) {
+    if (solved) return;
+    if (!selected) {
+      selected = tile;
+      tile.classList.add("selected");
+      return;
+    }
+    if (selected === tile) {
       selected.classList.remove("selected");
       selected = null;
-      checkSolved();
-    });
-  });
+      return;
+    }
+    const a = selected.textContent;
+    const b = tile.textContent;
+    selected.textContent = b;
+    tile.textContent = a;
+    selected.classList.remove("selected");
+    selected = null;
+    swapsUsed++;
+    updateSwapsLabel();
+    checkSolved();
+  }
+
+  resetBtn.addEventListener("click", startGame);
+  startGame();
 })();
 
 function escapeHtml(str) {
