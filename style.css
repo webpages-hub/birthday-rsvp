@@ -717,9 +717,17 @@ body {
 }
 
 /* Below this width the section container has no side margin left for the
-   corner doodles to sit in without risking overlap with a card/form that's
-   grown taller from text wrapping — hide them rather than chase precise
-   positioning across every width; they're decorative only. */
+   corner doodles to sit beside a card/form without risking overlap once
+   it's grown taller from text wrapping. Instead of hiding them, shrink
+   them and pin them to the section's own top/bottom padding band (empty
+   space above the kicker / below the card) so they stay clear of content
+   and never extend past the section's own width — no horizontal scroll. */
 @media (max-width: 860px) {
-  .section-doodle { display: none; }
+  .section-doodle {
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+    opacity: 0.3 !important;
+    top: 0.85rem !important;
+    bottom: auto !important;
+  }
 }
