@@ -723,9 +723,9 @@ body {
    and never extend past the section's own width — no horizontal scroll. */
 @media (max-width: 860px) {
   .section-doodle {
-    width: 1.6rem !important;
-    height: 1.6rem !important;
-    opacity: 0.3 !important;
+    width: 1.92rem !important;
+    height: 1.92rem !important;
+    opacity: 0.42 !important;
     top: 0.85rem !important;
     bottom: auto !important;
   }
