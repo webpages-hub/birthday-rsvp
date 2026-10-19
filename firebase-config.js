@@ -1,22 +1,17 @@
 // ============================================================
-// FIREBASE SETUP — fill this in before the site goes live.
+// FIREBASE SETUP — Wall of Wishes runs on Firestore.
 //
-// 1. Go to https://console.firebase.google.com/ and create a free project.
-// 2. In the project, go to Build > Firestore Database > Create database
-//    (start in "production mode", pick any region).
-// 3. Go to Project settings (gear icon) > General > "Your apps" >
-//    click the web icon (</>) to register a web app, and copy the
-//    firebaseConfig object it gives you into FIREBASE_CONFIG below.
-// 4. In Firestore > Rules, paste the rules from firestore.rules in this
-//    repo and click "Publish" — this lets visitors submit RSVPs/wishes
-//    and read them, without allowing edits/deletes of others' entries.
+// This API key is a public client identifier (not a secret) — Firebase's
+// actual security comes from the Firestore rules in firestore.rules, which
+// still need to be published in the Firebase console under
+// Firestore Database > Rules before wishes go live for every visitor.
 // ============================================================
 
 export const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyBGWcNW6A4NBa9kO3oCV46_8h1RkJUgK5s",
+  authDomain: "attendmybirthday.firebaseapp.com",
+  projectId: "attendmybirthday",
+  storageBucket: "attendmybirthday.firebasestorage.app",
+  messagingSenderId: "306708708436",
+  appId: "1:306708708436:web:1d573545d8f5fc8c0c41c1",
 };
