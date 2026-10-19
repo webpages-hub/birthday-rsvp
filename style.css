@@ -138,6 +138,14 @@ body {
   background: var(--pink-script);
 }
 
+.hero-character {
+  display: block;
+  width: clamp(140px, 26vw, 200px);
+  height: auto;
+  margin: 0 auto 1.25rem;
+  animation: fadeInUp 1s ease both;
+}
+
 .hero-headline {
   font-size: clamp(1.9rem, 4.2vw, 2.6rem);
   font-weight: 700;
@@ -194,6 +202,8 @@ body {
   background: transparent;
   color: var(--purple-deep);
   border: 2px solid var(--purple-deep);
+  padding: 0.95rem 1.5rem;
+  font-size: 0.95rem;
 }
 .btn-secondary:hover { transform: translateY(-3px) scale(1.03); background: rgba(62, 42, 30, 0.08); }
 
