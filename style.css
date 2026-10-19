@@ -2,26 +2,37 @@
   /* Muted, warm palette modeled on a dusty-rose/espresso invite card —
      softer and more blended than the old neon pink/purple, while keeping
      both hues present. */
-  --pink-hot: #9c4c64;      /* dusty rosewood (fuchsia-section bg) */
-  --pink-soft: #f2e3d5;     /* warm cream (baby-pink-section bg) */
-  --purple-mid: #63405a;    /* muted mauve-plum (purple-section bg) */
-  --purple-light: #cdb2c4;  /* soft mauve-lavender (light-purple-section bg) */
-  --purple-deep: #3e2a1e;   /* espresso brown, dark text on light backgrounds */
-  --orchid: #8c4a5c;        /* rosewood-plum (Venue section bg) */
+  /* Accent colors — used for buttons, icons and section tags, never as
+     full section fills (those are the soft tones below). */
+  --pink-hot: #9c4c64;      /* dusty rosewood */
+  --purple-mid: #63405a;    /* muted mauve-plum */
+  --purple-light: #cdb2c4;  /* soft mauve-lavender */
+  --purple-deep: #3e2a1e;   /* espresso brown, main dark text */
+  --orchid: #8c4a5c;        /* rosewood-plum */
+  --plum-deep: #4a2f42;     /* deep plum */
+  --pink-script: #cc8a9b;   /* soft dusty rose, from the invite's "Its My Birthday" script text */
   --teal: #7fa396;          /* dusty sage, doodle accent */
   --lime: #b6bd7a;          /* soft olive, doodle accent */
   --orange: #c98a5e;        /* warm terracotta, doodle accent */
   --gold: #c9a227;          /* antique gold */
   --white: #fbf6ee;         /* warm ivory */
-  --pink-script: #cc8a9b;   /* soft dusty rose, from the invite's "Its My Birthday" script text — Hero bg */
   --radius: 22px;
 
-  /* Soft, section-tinted card backgrounds (instead of plain white) —
-     mixed toward each section's own hue, not just barely off-white. */
-  --tint-pink: #f2e6d8;     /* on baby-pink (Vibe) */
-  --tint-orchid: #d9b6be;   /* on orchid (Venue) */
-  --tint-fuchsia: #e8c7c0;  /* on fuchsia (RSVP) */
-  --tint-purple: #dcc9d4;   /* on purple (Wall of Wishes) */
+  /* Soft section backgrounds — a family of warm, blended tones (same
+     spirit as the Vibe section's cream), each section's own hue kept
+     subtle rather than a saturated full-color fill. */
+  --pink-soft: #f2e3d5;        /* Vibe — warm cream */
+  --section-blush: #f3ddd3;    /* Venue — warm blush */
+  --section-rose: #f1dcd8;     /* RSVP — soft rose-blush */
+  --section-mauve: #e9dbe0;    /* Wall of Wishes — soft mauve-cream */
+  --section-gold-cream: #f4e6da; /* Before You Go — warm golden-cream */
+
+  /* Card backgrounds — a shade closer to white than their section,
+     so cards read as a gentle layer rather than a block of color. */
+  --tint-pink: #f2e6d8;     /* on Vibe */
+  --tint-orchid: #f6e8e0;   /* on Venue */
+  --tint-fuchsia: #f5e2dc;  /* on RSVP */
+  --tint-purple: #efe3e7;   /* on Wall of Wishes */
 }
 
 * { box-sizing: border-box; }
@@ -51,18 +62,19 @@ body {
   margin: 0 auto;
 }
 
-.bg-fuchsia { background: var(--pink-hot); }
-.bg-purple { background: var(--purple-mid); }
+.bg-fuchsia { background: var(--section-rose); }
+.bg-purple { background: var(--section-mauve); }
 .bg-baby-pink { background: var(--pink-soft); }
-.bg-light-purple { background: var(--purple-light); }
-.bg-orchid { background: var(--orchid); }
+.bg-light-purple { background: var(--section-gold-cream); }
+.bg-orchid { background: var(--section-blush); }
 
-/* Text on dark/saturated backgrounds (fuchsia, purple) */
+/* All section fills are soft/light now, so every section reads as
+   on-light; kept for any future darker background. */
 .on-dark, .on-dark .section-sub { color: var(--white); }
 .on-dark .section-title { color: var(--white); }
 .on-dark .eyebrow { color: var(--purple-deep); }
 
-/* Text on light backgrounds (baby pink, light purple) */
+/* Text on light backgrounds (all sections) */
 .on-light, .on-light .section-sub { color: var(--purple-deep); }
 .on-light .section-title { color: var(--purple-deep); }
 
@@ -82,14 +94,14 @@ body {
   padding: 0.4rem 1rem;
   border-radius: 999px;
 }
-/* Each badge uses a bright, saturated fill with whichever text color
-   (dark or white) keeps it at or above WCAG AA contrast. */
+/* Each section tag uses its own shade of pink or purple, with whichever
+   text color (dark or white) keeps it at or above WCAG AA contrast. */
 .badge-pink { background: var(--pink-hot); color: var(--white); }
-.badge-lime { background: var(--lime); color: var(--purple-deep); }
+.badge-lime { background: var(--orchid); color: var(--white); }
 .badge-teal { background: var(--teal); color: var(--purple-deep); }
-.badge-gold { background: var(--gold); color: var(--purple-deep); }
+.badge-gold { background: var(--plum-deep); color: var(--white); }
 .badge-purple { background: var(--purple-mid); color: var(--white); }
-.badge-orange { background: var(--orange); color: var(--purple-deep); }
+.badge-orange { background: var(--pink-script); color: var(--purple-deep); }
 
 /* ============ Icons ============ */
 .icon {
@@ -282,8 +294,8 @@ body {
 }
 .btn-primary {
   background: var(--white);
-  color: var(--purple-deep);
-  border: 2px solid var(--purple-deep);
+  color: var(--pink-hot);
+  border: 2px solid var(--pink-hot);
   box-shadow: 0 8px 24px rgba(62, 42, 30, 0.25);
 }
 .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(62, 42, 30, 0.35); }
@@ -400,7 +412,7 @@ body {
   max-width: 480px;
   margin: 0 auto 3rem;
   background: var(--tint-fuchsia);
-  border: 2px solid var(--purple-light);
+  border: 2px solid var(--pink-script);
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 15px 40px rgba(62, 42, 30, 0.2);
@@ -449,7 +461,7 @@ body {
   text-align: center;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--white);
+  color: var(--purple-deep);
   margin: 0 0 1.5rem;
 }
 
@@ -497,7 +509,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.wishes-empty { text-align: center; color: var(--white); grid-column: 1 / -1; }
+.wishes-empty { text-align: center; color: var(--purple-deep); grid-column: 1 / -1; }
 
 .wish-card-doodle {
   position: absolute;
@@ -520,11 +532,11 @@ body {
   width: fit-content;
   margin: 2rem auto 0;
   background: transparent;
-  color: var(--white);
-  border: 2px solid var(--white);
+  color: var(--purple-mid);
+  border: 2px solid var(--purple-mid);
 }
 .wishes-more:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(99, 64, 90, 0.1);
   transform: translateY(-3px) scale(1.03);
 }
 .wishes-more .arrow {
