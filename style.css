@@ -250,6 +250,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 .vibe-card {
   background: var(--tint-pink);
@@ -270,7 +271,7 @@ body {
 /* ============ Venue ============ */
 .venue-card {
   max-width: 560px;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   background: var(--tint-orchid);
   border-radius: var(--radius);
   overflow: hidden;
@@ -413,7 +414,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.25rem;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
 }
 .wish-card {
   background: var(--tint-pink);
