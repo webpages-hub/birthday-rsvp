@@ -167,6 +167,7 @@ body {
 }
 @media (max-width: 860px) {
   .hero-headline, .hero-tagline { margin-inline: auto; }
+  .hero { justify-content: flex-start; padding-top: 2.25rem; }
 }
 
 .hero-content {
