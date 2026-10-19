@@ -360,10 +360,7 @@ function writeLocal(key, arr) {
 const GOOGLE_FORM_RESPONSE_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/formResponse";
 const GOOGLE_FORM_NAME_ENTRY = "entry.2114240558";
-// Add a "Notes" question to the Google Form, then paste its entry.XXXXXXXXX
-// id here — until it's filled in, the notes field is collected in the UI
-// but not sent, so nothing breaks in the meantime.
-const GOOGLE_FORM_NOTES_ENTRY = "";
+const GOOGLE_FORM_NOTES_ENTRY = "entry.765198096";
 
 rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
