@@ -42,24 +42,6 @@ if (isConfigured) {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 })();
 
-/* ---------------- "25 Years Later..." doodle badge ---------------- */
-(function initYearsBadge() {
-  const badge = document.getElementById("years-badge");
-  if (!badge) return;
-  const obs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          badge.classList.add("play");
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-  obs.observe(badge);
-})();
-
 /* ---------------- Background music toggle ---------------- */
 const MUSIC_PREF_KEY = "halimat-music-playing";
 
