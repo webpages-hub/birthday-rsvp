@@ -1,23 +1,26 @@
 :root {
-  --pink-hot: #ff2fb1;      /* fuchsia pink */
-  --pink-soft: #ffb6e6;     /* baby pink */
-  --purple-mid: #7b2ff7;    /* purple */
-  --purple-light: #d8b4fe;  /* lavender */
-  --purple-deep: #3d0a58;   /* dark text, on light backgrounds */
-  --orchid: #b3308f;        /* deep magenta-purple, Expectation background */
-  --teal: #2dd4bf;          /* doodle accent */
-  --lime: #a3e635;          /* doodle accent */
-  --orange: #ff8c42;        /* doodle accent */
-  --gold: #ffd700;          /* yellow */
-  --white: #fffaff;
+  /* Muted, warm palette modeled on a dusty-rose/espresso invite card —
+     softer and more blended than the old neon pink/purple, while keeping
+     both hues present. */
+  --pink-hot: #9c4c64;      /* dusty rosewood (fuchsia-section bg) */
+  --pink-soft: #f2e3d5;     /* warm cream (baby-pink-section bg) */
+  --purple-mid: #63405a;    /* muted mauve-plum (purple-section bg) */
+  --purple-light: #cdb2c4;  /* soft mauve-lavender (light-purple-section bg) */
+  --purple-deep: #3e2a1e;   /* espresso brown, dark text on light backgrounds */
+  --orchid: #8c4a5c;        /* rosewood-plum (Venue section bg) */
+  --teal: #7fa396;          /* dusty sage, doodle accent */
+  --lime: #b6bd7a;          /* soft olive, doodle accent */
+  --orange: #c98a5e;        /* warm terracotta, doodle accent */
+  --gold: #c9a227;          /* antique gold */
+  --white: #fbf6ee;         /* warm ivory */
   --radius: 22px;
 
   /* Soft, section-tinted card backgrounds (instead of plain white) —
      mixed toward each section's own hue, not just barely off-white. */
-  --tint-pink: #ffdaf2;     /* on baby-pink (Vibe) */
-  --tint-orchid: #e1acd2;   /* on orchid (Expectation) */
-  --tint-fuchsia: #ffcdec;  /* on fuchsia (RSVP) */
-  --tint-purple: #d9c6fb;   /* on purple (Wall of Wishes) */
+  --tint-pink: #f2e6d8;     /* on baby-pink (Vibe) */
+  --tint-orchid: #d9b6be;   /* on orchid (Venue) */
+  --tint-fuchsia: #e8c7c0;  /* on fuchsia (RSVP) */
+  --tint-purple: #dcc9d4;   /* on purple (Wall of Wishes) */
 }
 
 * { box-sizing: border-box; }
@@ -58,11 +61,6 @@ body {
 .on-dark .section-title { color: var(--white); }
 .on-dark .eyebrow { color: var(--purple-deep); }
 
-/* Fuchsia is bright enough that white body text falls short of AA contrast
-   at normal (non-large) text sizes — use dark text for anything but the
-   big display headings there. */
-.bg-fuchsia.on-dark .section-sub { color: var(--purple-deep); }
-
 /* Text on light backgrounds (baby pink, light purple) */
 .on-light, .on-light .section-sub { color: var(--purple-deep); }
 .on-light .section-title { color: var(--purple-deep); }
@@ -85,7 +83,7 @@ body {
 }
 /* Each badge uses a bright, saturated fill with whichever text color
    (dark or white) keeps it at or above WCAG AA contrast. */
-.badge-pink { background: var(--pink-hot); color: var(--purple-deep); }
+.badge-pink { background: var(--pink-hot); color: var(--white); }
 .badge-lime { background: var(--lime); color: var(--purple-deep); }
 .badge-teal { background: var(--teal); color: var(--purple-deep); }
 .badge-gold { background: var(--gold); color: var(--purple-deep); }
@@ -284,9 +282,9 @@ body {
   background: var(--white);
   color: var(--purple-deep);
   border: 2px solid var(--purple-deep);
-  box-shadow: 0 8px 24px rgba(61, 10, 88, 0.25);
+  box-shadow: 0 8px 24px rgba(62, 42, 30, 0.25);
 }
-.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(61, 10, 88, 0.35); }
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(62, 42, 30, 0.35); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 .btn-row {
@@ -299,8 +297,8 @@ body {
 
 .pulse { animation: pulseGlow 2.4s ease-in-out infinite, fadeInUp 1s ease both; animation-delay: 0s, .5s; }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 8px 24px rgba(61,10,88,0.25); }
-  50% { box-shadow: 0 8px 36px rgba(61,10,88,0.4), 0 0 0 8px rgba(255,255,255,0.15); }
+  0%, 100% { box-shadow: 0 8px 24px rgba(62,42,30,0.25); }
+  50% { box-shadow: 0 8px 36px rgba(62,42,30,0.4), 0 0 0 8px rgba(255,255,255,0.15); }
 }
 
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
@@ -339,15 +337,15 @@ body {
   border-radius: var(--radius);
   padding: 2rem 1.5rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(61, 10, 88, 0.2);
+  box-shadow: 0 10px 30px rgba(62, 42, 30, 0.2);
   transition: transform .35s ease, box-shadow .35s ease;
 }
 .vibe-card:hover {
   transform: translateY(-10px) rotate(-1deg);
-  box-shadow: 0 18px 40px rgba(61, 10, 88, 0.3);
+  box-shadow: 0 18px 40px rgba(62, 42, 30, 0.3);
 }
 .vibe-card h3 { margin: 0.2rem 0 0.4rem; font-size: 1.15rem; color: var(--purple-deep); }
-.vibe-card p { margin: 0; color: #6b3a94; font-size: 0.95rem; }
+.vibe-card p { margin: 0; color: #5a4030; font-size: 0.95rem; }
 .expectation-section .vibe-card { background: var(--tint-orchid); }
 
 /* ============ Venue ============ */
@@ -357,7 +355,7 @@ body {
   background: var(--tint-orchid);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(61, 10, 88, 0.25);
+  box-shadow: 0 10px 30px rgba(62, 42, 30, 0.25);
 }
 .venue-photo {
   display: block;
@@ -379,7 +377,7 @@ body {
   justify-content: center;
   gap: 0.4rem;
   font-size: 1rem;
-  color: #6b1f52;
+  color: #5c2e3a;
 }
 .venue-date { margin-top: 0.5rem; }
 .venue-address .icon,
@@ -403,7 +401,7 @@ body {
   border: 2px solid var(--purple-light);
   border-radius: var(--radius);
   padding: 2rem;
-  box-shadow: 0 15px 40px rgba(61, 10, 88, 0.2);
+  box-shadow: 0 15px 40px rgba(62, 42, 30, 0.2);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -420,8 +418,8 @@ body {
   font-size: 1rem;
   padding: 0.8rem 1rem;
   border-radius: 14px;
-  border: 2px solid #eccdfb;
-  background: #fff;
+  border: 2px solid #dfc3c8;
+  background: var(--white);
   color: var(--purple-deep);
   resize: vertical;
   transition: border-color .25s ease, box-shadow .25s ease;
@@ -429,7 +427,7 @@ body {
 .glass-form input:focus, .glass-form textarea:focus, .glass-form select:focus {
   outline: none;
   border-color: var(--pink-hot);
-  box-shadow: 0 0 0 4px rgba(255,47,177,0.15);
+  box-shadow: 0 0 0 4px rgba(156,76,100,0.15);
 }
 .glass-form .btn { margin-top: 1.3rem; align-self: center; }
 
@@ -441,7 +439,7 @@ body {
   margin: 0.6rem 0 0;
   color: var(--purple-mid);
 }
-.form-status.error { color: #e0287a; }
+.form-status.error { color: #8a3347; }
 .form-status.success { color: #16a34a; }
 
 /* ============ Wall of Wishes ============ */
@@ -464,7 +462,7 @@ body {
   background: var(--tint-pink);
   border-radius: 18px;
   padding: 1.4rem 2.4rem 1.4rem 1.4rem;
-  box-shadow: 0 10px 26px rgba(61, 10, 88, 0.2);
+  box-shadow: 0 10px 26px rgba(62, 42, 30, 0.2);
   border-top: 4px solid var(--pink-hot);
   animation: popIn .45s ease both;
   position: relative;
@@ -478,7 +476,7 @@ body {
 
 .wish-card p.msg {
   margin: 0 0 0.7rem;
-  color: #4a2a68;
+  color: var(--purple-deep);
   font-size: 0.95rem;
   line-height: 1.5;
   font-family: 'Poppins', sans-serif;
@@ -490,7 +488,7 @@ body {
   margin-left: 0.3rem;
   padding: 0.1rem 0.55rem;
   border-radius: 999px;
-  background: rgba(61, 10, 88, 0.08);
+  background: rgba(62, 42, 30, 0.08);
   color: var(--purple-deep);
   font-weight: 600;
   font-size: 0.72rem;
@@ -562,13 +560,13 @@ body {
   font-size: 1.4rem;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(61, 10, 88, 0.25);
+  box-shadow: 0 6px 16px rgba(62, 42, 30, 0.25);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 .tile:hover { transform: translateY(-3px); }
 .tile.selected {
   background: var(--pink-hot);
-  box-shadow: 0 6px 18px rgba(255, 47, 177, 0.5);
+  box-shadow: 0 6px 18px rgba(156, 76, 100, 0.5);
   transform: scale(1.08);
 }
 .scramble-tiles.solved .tile {
@@ -662,7 +660,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(61, 10, 88, 0.4);
+  box-shadow: 0 8px 20px rgba(62, 42, 30, 0.4);
   transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
 .music-toggle:hover { transform: scale(1.08); }
@@ -673,8 +671,8 @@ body {
   animation: musicPulse 1.8s ease-in-out infinite;
 }
 @keyframes musicPulse {
-  0%, 100% { box-shadow: 0 8px 20px rgba(61, 10, 88, 0.4); }
-  50% { box-shadow: 0 8px 26px rgba(255, 215, 0, 0.55), 0 0 0 6px rgba(255, 215, 0, 0.12); }
+  0%, 100% { box-shadow: 0 8px 20px rgba(62, 42, 30, 0.4); }
+  50% { box-shadow: 0 8px 26px rgba(201, 162, 39, 0.55), 0 0 0 6px rgba(201, 162, 39, 0.12); }
 }
 @media (max-width: 520px) {
   .music-toggle { bottom: 1rem; left: 1rem; width: 2.9rem; height: 2.9rem; }
@@ -689,7 +687,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
-  background: rgba(61, 10, 88, 0.55);
+  background: rgba(62, 42, 30, 0.55);
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s ease;
@@ -706,7 +704,7 @@ body {
   border-radius: var(--radius);
   padding: 2.5rem 1.75rem 1.75rem;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(61, 10, 88, 0.4);
+  box-shadow: 0 20px 50px rgba(62, 42, 30, 0.4);
   transform: scale(0.92) translateY(10px);
   transition: transform .25s ease;
 }
