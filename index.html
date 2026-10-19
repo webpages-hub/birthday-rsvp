@@ -105,6 +105,9 @@
     <symbol id="icon-close" viewBox="0 0 24 24">
       <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
     </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C7.58 2 4 5.58 4 10c0 5.25 6.72 11.23 7.2 11.65a1.2 1.2 0 0 0 1.6 0C13.28 21.23 20 15.25 20 10c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -177,45 +180,40 @@
   <div class="container">
     <p class="kicker"><span class="kicker-badge badge-pink"><svg class="icon" aria-hidden="true"><use href="#icon-hat"/></svg>01 &mdash; The Vibe</span></p>
     <h2 class="section-title">The Vibe</h2>
-    <p class="section-sub">Here's what to expect. Come as you are, leave with a full heart.</p>
+    <p class="section-sub">Here's what to expect. Good food, good people, and a night to remember.</p>
 
     <div class="vibe-grid">
       <div class="vibe-card">
-        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-mic"/></svg>
-        <h3>Prepare a Presentation</h3>
-        <p>On literally anything. A poem, a rant or a PowerPoint about your cat. You get to share a piece of your thoughts with everyone.</p>
+        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-plate"/></svg>
+        <h3>A Proper Sit-Down Dinner</h3>
+        <p>We're trading the snacks for a full dinner. Come hungry, we've got you covered.</p>
       </div>
       <div class="vibe-card">
-        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-music"/></svg>
-        <h3>Come Ready to Stretch</h3>
-        <p>There will be musical chairs, musical bumps, hot potato and freeze dancing.</p>
+        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-mic"/></svg>
+        <h3>Laughs All Round</h3>
+        <p>Toasts, stories and probably some roasting. Bring your best one-liners.</p>
       </div>
       <div class="vibe-card">
         <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-photo"/></svg>
-        <h3>Reminiscing on Old Times</h3>
+        <h3>Sharing Memories</h3>
         <p>Bring your favorite memory of any interaction we have had. Let's take a trip down the memory lane together.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ THE EXPECTATION — fuchsia pink ============ -->
-<section class="fw-section bg-orchid on-dark expectation-section" id="expectation">
+<!-- ============ THE VENUE — orchid ============ -->
+<section class="fw-section bg-orchid on-dark venue-section" id="venue">
   <div class="container">
-    <p class="kicker"><span class="kicker-badge badge-lime"><svg class="icon" aria-hidden="true"><use href="#icon-glasses"/></svg>02 &mdash; The Expectation</span></p>
-    <h2 class="section-title">The Expectation</h2>
-    <p class="section-sub">Here's what you need to do.</p>
+    <p class="kicker"><span class="kicker-badge badge-lime"><svg class="icon" aria-hidden="true"><use href="#icon-plate"/></svg>02 &mdash; The Venue</span></p>
+    <h2 class="section-title">Dinner at Ikoko Lagos</h2>
+    <p class="section-sub">Join us for an evening of dinner, laughs and shared memories.</p>
 
-    <div class="vibe-grid">
-      <div class="vibe-card">
-        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-plate"/></svg>
-        <h3>Eat From Home</h3>
-        <p>There won't be provision for food, just snacks. So, please, eat from home, or prepare to starve.</p>
-      </div>
-      <div class="vibe-card">
-        <svg class="icon vibe-card-icon" aria-hidden="true"><use href="#icon-glasses"/></svg>
-        <h3>Bring a Drink</h3>
-        <p>Come with your favorite bottles. There's snacks, but you bring the sips.</p>
+    <div class="venue-card">
+      <img src="assets/venue-ikoko.jpg" alt="Ikoko Restaurant & Bar entrance" class="venue-photo" loading="lazy">
+      <div class="venue-details">
+        <h3>Ikoko Restaurant &amp; Bar</h3>
+        <p class="venue-address"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg>23b Isaac John, Ikeja GRA, Lagos</p>
       </div>
     </div>
   </div>
@@ -226,7 +224,7 @@
   <div class="container">
     <p class="kicker"><span class="kicker-badge badge-teal"><svg class="icon" aria-hidden="true"><use href="#icon-shirt"/></svg>03 &mdash; Dress Code</span></p>
     <h2 class="section-title">Dress Code</h2>
-    <p class="dresscode-text">Wear whatever you are comfortable in! I'd love to see colors and sparkles, but comfort always wins.</p>
+    <p class="dresscode-text">We're dining out, so let's look the part! Smart and chic, with comfort still in mind &mdash; something you can laugh, eat and take photos in all night.</p>
   </div>
 </section>
 
@@ -235,11 +233,14 @@
   <div class="container">
     <p class="kicker"><span class="kicker-badge badge-purple"><svg class="icon" aria-hidden="true"><use href="#icon-gift"/></svg>04 &mdash; RSVP</span></p>
     <h2 class="section-title">RSVP</h2>
-    <p class="section-sub">Let us know you are coming! The full location and date details will be sent your way once you do.</p>
+    <p class="section-sub">Let us know you are coming! We can't wait to celebrate with you at Ikoko Lagos.</p>
 
     <form id="rsvp-form" class="glass-form">
-      <label for="rsvp-name">Your Name</label>
+      <label for="rsvp-name">Full Name</label>
       <input type="text" id="rsvp-name" name="name" placeholder="e.g. Ada Okafor" required maxlength="80" autocomplete="name">
+
+      <label for="rsvp-notes">Notes for the celebrant or the restaurant (optional)</label>
+      <textarea id="rsvp-notes" name="notes" rows="3" placeholder="Allergies, dietary needs, a message for Halimat..." maxlength="600"></textarea>
 
       <button type="submit" class="btn btn-primary" id="rsvp-submit">
         <span class="btn-label">Count Me In! &rarr;</span>

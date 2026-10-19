@@ -360,11 +360,17 @@ function writeLocal(key, arr) {
 const GOOGLE_FORM_RESPONSE_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLScu6knwyXz_VMd88Bg5Tg6QJ5ojhfoK5UEnzazHntDF1SKt-g/formResponse";
 const GOOGLE_FORM_NAME_ENTRY = "entry.2114240558";
+// Add a "Notes" question to the Google Form, then paste its entry.XXXXXXXXX
+// id here — until it's filled in, the notes field is collected in the UI
+// but not sent, so nothing breaks in the meantime.
+const GOOGLE_FORM_NOTES_ENTRY = "";
 
 rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nameInput = document.getElementById("rsvp-name");
+  const notesInput = document.getElementById("rsvp-notes");
   const name = nameInput.value.trim();
+  const notes = notesInput ? notesInput.value.trim() : "";
   if (!name) return;
 
   rsvpSubmit.disabled = true;
@@ -374,6 +380,9 @@ rsvpForm.addEventListener("submit", async (e) => {
   try {
     const body = new URLSearchParams();
     body.set(GOOGLE_FORM_NAME_ENTRY, name);
+    if (GOOGLE_FORM_NOTES_ENTRY && notes) {
+      body.set(GOOGLE_FORM_NOTES_ENTRY, notes);
+    }
     // Google Forms doesn't send CORS headers, so the response is opaque —
     // "no-cors" is the only mode that lets the POST go through at all; we
     // can't read back success/failure, only whether the request itself
@@ -384,7 +393,7 @@ rsvpForm.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body,
     });
-    rsvpStatus.textContent = "You're on the list! Location details coming your way.";
+    rsvpStatus.textContent = "You're on the list! See you at Ikoko Lagos.";
     rsvpStatus.className = "form-status success";
     rsvpForm.reset();
     fireConfetti();
