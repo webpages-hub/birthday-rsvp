@@ -380,6 +380,19 @@ body {
 .form-status.success { color: #16a34a; }
 
 /* ============ Wall of Wishes ============ */
+.wishes-curve {
+  position: absolute;
+  top: -70px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 0;
+}
+.wishes-curve path { fill: var(--section-mauve); }
+@media (max-width: 520px) {
+  .wishes-curve { top: -36px; height: 36px; }
+}
+
 .wishes-lead {
   text-align: center;
   font-weight: 700;
