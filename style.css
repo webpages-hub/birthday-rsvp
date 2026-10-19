@@ -379,8 +379,10 @@ body {
 .form-status.error { color: #8a3347; }
 .form-status.success { color: #16a34a; }
 
-/* ============ Wall of Wishes ============ */
-.wishes-curve {
+/* Curved top edge on every section after the hero — a shallow dome in
+   the section's own background color, poking up into the section above
+   it to replace the flat horizontal seam between them. */
+.section-curve {
   position: absolute;
   top: -70px;
   left: 0;
@@ -388,11 +390,16 @@ body {
   height: 70px;
   z-index: 0;
 }
-.wishes-curve path { fill: var(--section-mauve); }
 @media (max-width: 520px) {
-  .wishes-curve { top: -36px; height: 36px; }
+  .section-curve { top: -36px; height: 36px; }
 }
+.vibe-curve path { fill: var(--pink-soft); }
+.venue-curve path { fill: var(--section-blush); }
+.rsvp-curve path { fill: var(--section-rose); }
+.wishes-curve path { fill: var(--section-mauve); }
+.game-curve path { fill: var(--section-gold-cream); }
 
+/* ============ Wall of Wishes ============ */
 .wishes-lead {
   text-align: center;
   font-weight: 700;
