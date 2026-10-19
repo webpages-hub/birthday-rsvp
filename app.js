@@ -60,22 +60,6 @@ if (isConfigured) {
   obs.observe(badge);
 })();
 
-/* ---------------- Venue photo auto-flip ---------------- */
-(function initVenuePhotoFlip() {
-  const frame = document.getElementById("venue-photo-frame");
-  if (!frame) return;
-  const photos = frame.querySelectorAll(".venue-photo");
-  if (photos.length < 2) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  let active = 0;
-  setInterval(() => {
-    photos[active].classList.remove("is-active");
-    active = (active + 1) % photos.length;
-    photos[active].classList.add("is-active");
-  }, 2000);
-})();
-
 /* ---------------- Background music toggle ---------------- */
 const MUSIC_PREF_KEY = "halimat-music-playing";
 
