@@ -383,7 +383,8 @@ body {
   text-align: center;
 }
 .venue-details h3 { margin: 0 0 0.5rem; font-size: 1.3rem; color: var(--purple-deep); }
-.venue-address {
+.venue-address,
+.venue-date {
   margin: 0;
   display: flex;
   align-items: center;
@@ -392,7 +393,10 @@ body {
   font-size: 1rem;
   color: #6b1f52;
 }
-.venue-address .icon { width: 1.1rem; height: 1.1rem; flex-shrink: 0; color: var(--orchid); }
+.venue-date { margin-top: 0.5rem; }
+.venue-address .icon,
+.venue-date .icon { width: 1.1rem; height: 1.1rem; flex-shrink: 0; color: var(--orchid); }
+.venue-rsvp-cta { margin-top: 1.5rem; }
 
 /* ============ Forms ============ */
 .glass-form {
